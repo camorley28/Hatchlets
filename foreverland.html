@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to ForeverLand | Hatchlets</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #0f172a 0%, #312e81 45%, #1e3a8a 100%);
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,.9), transparent),
+        radial-gradient(2px 2px at 120px 80px, rgba(255,255,255,.8), transparent),
+        radial-gradient(1.5px 1.5px at 220px 140px, rgba(255,255,255,.7), transparent),
+        radial-gradient(2px 2px at 320px 200px, rgba(255,255,255,.8), transparent),
+        radial-gradient(1.5px 1.5px at 420px 60px, rgba(255,255,255,.7), transparent);
+      background-size: 500px 300px;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .wrap {
+      position: relative;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 20px 80px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 14px;
+      margin-bottom: 20px;
+      backdrop-filter: blur(6px);
+    }
+
+    h1 {
+      font-size: 54px;
+      margin: 0 0 10px;
+      line-height: 1;
+    }
+
+    .subtitle {
+      font-size: 22px;
+      color: #dbeafe;
+      margin-bottom: 30px;
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 28px;
+      padding: 30px 24px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+      backdrop-filter: blur(8px);
+    }
+
+    .dalton {
+      font-size: 84px;
+      margin-bottom: 10px;
+    }
+
+    .welcome {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .message {
+      font-size: 18px;
+      line-height: 1.7;
+      color: #eef2ff;
+      max-width: 720px;
+      margin: 0 auto 28px;
+    }
+
+    .highlight {
+      color: #fde68a;
+      font-weight: bold;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin: 34px 0 28px;
+    }
+
+    .feature {
+      background: rgba(15,23,42,0.55);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 20px;
+      padding: 18px;
+      text-align: left;
+    }
+
+    .feature h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+
+    .feature p {
+      margin: 0;
+      color: #dbeafe;
+      line-height: 1.5;
+      font-size: 15px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .btn {
+      text-decoration: none;
+      padding: 15px 24px;
+      border-radius: 14px;
+      font-size: 17px;
+      font-weight: bold;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.95;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, #f59e0b, #ec4899);
+      color: white;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.16);
+      color: white;
+    }
+
+    .footer-note {
+      margin-top: 28px;
+      font-size: 14px;
+      color: #cbd5e1;
+    }
+
+    @media (max-width: 640px) {
+      h1 {
+        font-size: 40px;
+      }
+
+      .subtitle {
+        font-size: 18px;
+      }
+
+      .welcome {
+        font-size: 23px;
+      }
+
+      .message {
+        font-size: 16px;
+      }
+
+      .dalton {
+        font-size: 68px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+
+  <div class="wrap">
+    <div class="badge">✨ Welcome to ForeverLand ✨</div>
+
+    <h1>Forever is Everywhere.</h1>
+    <div class="subtitle">A magical world where your Hatchlet comes to life.</div>
+
+    <div class="hero-card">
+      <div class="dalton">🐉</div>
+      <div class="welcome">Hi, I’m Dalton the Dragon.</div>
+
+      <p class="message">
+        Welcome to <span class="highlight">ForeverLand</span> — the enchanted world hidden inside every Hatchlet.
+        Here, your creature is more than a collectible. It’s your companion, your teammate, and part of your growing legend.
+      </p>
+
+      <p class="message">
+        In ForeverLand, you’ll <span class="highlight">discover rare Hatchlets</span>, build your collection,
+        explore magical places, and help your creatures grow stronger over time.
+        Some Hatchlets love to play, some love to train, and some may evolve into something extraordinary.
+      </p>
+
+      <div class="grid">
+        <div class="feature">
+          <h3>🥚 Hatch & Discover</h3>
+          <p>Every code reveals a real Hatchlet with its own name, rarity, type, and personality.</p>
+        </div>
+
+        <div class="feature">
+          <h3>🌎 Explore ForeverLand</h3>
+          <p>Travel through magical zones where forever is everywhere and every Hatchlet has a place to belong.</p>
+        </div>
+
+        <div class="feature">
+          <h3>⭐ Collect & Grow</h3>
+          <p>Build your team, care for your Hatchlets, and watch your world grow bigger with every new hatch.</p>
+        </div>
+
+        <div class="feature">
+          <h3>⚔️ Train & Adventure</h3>
+          <p>Level up your Hatchlets through play, discovery, and future adventures across ForeverLand.</p>
+        </div>
+      </div>
+
+      <div class="buttons">
+        <a href="#" class="btn btn-primary">Meet My Hatchlet</a>
+        <a href="#" class="btn btn-secondary">Enter ForeverLand</a>
+      </div>
+
+      <div class="footer-note">
+        Dalton will guide you as you begin your first journey.
+      </div>
+    </div>
+  </div>
+</body>
+</html>
