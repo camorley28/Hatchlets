@@ -11,8 +11,8 @@
 
   <div style="margin-top:40px;">
     <input id="codeInput" placeholder="Enter Your Code"
-      style="padding:15px; font-size:18px; border-radius:8px; border:none;">
-    
+      style="padding:15px; font-size:18px; border-radius:8px; border:none; width:280px;">
+
     <br><br>
 
     <button onclick="redeemCode()"
@@ -21,20 +21,43 @@
     </button>
   </div>
 
-  <p id="result" style="margin-top:30px; font-size:20px;"></p>
+  <div id="result" style="margin-top:30px;"></div>
 
   <script>
-    function redeemCode() {
-      const code = document.getElementById("codeInput").value;
+    const hatchletCodes = {
+      // AXOLOTLS
+      "AXO-BUBBLES-1042": { species:"Axolotl", name:"Bubbles", rarity:"Epic", type:"Water", personality:"Playful", emoji:"🫧" },
+      "AXO-MISTY-2817": { species:"Axolotl", name:"Misty", rarity:"Rare", type:"Mystic Water", personality:"Gentle", emoji:"🌊" },
+      "AXO-RIPPLE-6632": { species:"Axolotl", name:"Ripple", rarity:"Common", type:"Water", personality:"Curious", emoji:"💧" },
+      "AXO-PEARL-8891": { species:"Axolotl", name:"Pearl", rarity:"Rare", type:"Moon Water", personality:"Sweet", emoji:"🌙" },
+      "AXO-LUNA-5821": { species:"Axolotl", name:"Luna", rarity:"Legendary", type:"Celestial", personality:"Magical", emoji:"✨" },
 
-      if(code === "DRAGON123") {
-        document.getElementById("result").innerHTML = "🔥 You hatched a DRAGON Hatchlet!";
-      } 
-      else if(code === "AXOLOTL777") {
-        document.getElementById("result").innerHTML = "💧 You hatched an AXOLOTL Hatchlet!";
-      }
-      else {
-        document.getElementById("result").innerHTML = "❌ Invalid code... try again!";
+      // DRAGONS
+      "DRG-LUMO-8831": { species:"Dragon", name:"Lumo", rarity:"Rare", type:"Fire", personality:"Bold", emoji:"🔥" },
+      "DRG-EMBER-5520": { species:"Dragon", name:"Ember", rarity:"Epic", type:"Flame", personality:"Fierce", emoji:"🐉" },
+      "DRG-BLAZE-7744": { species:"Dragon", name:"Blaze", rarity:"Common", type:"Fire", personality:"Energetic", emoji:"⚡" },
+      "DRG-DRAKO-3392": { species:"Dragon", name:"Drako", rarity:"Rare", type:"Shadow Fire", personality:"Mischievous", emoji:"🌋" },
+      "DRG-CINDER-9918": { species:"Dragon", name:"Cinder", rarity:"Legendary", type:"Ancient Flame", personality:"Loyal", emoji:"👑" }
+    };
+
+    function redeemCode() {
+      const input = document.getElementById("codeInput").value.trim().toUpperCase();
+      const result = document.getElementById("result");
+      const hatchlet = hatchletCodes[input];
+
+      if (hatchlet) {
+        result.innerHTML = `
+          <div style="background:#111827; max-width:500px; margin:0 auto; padding:25px; border-radius:16px;">
+            <div style="font-size:50px;">${hatchlet.emoji}</div>
+            <h2>${hatchlet.name} hatched!</h2>
+            <p><strong>Species:</strong> ${hatchlet.species}</p>
+            <p><strong>Rarity:</strong> ${hatchlet.rarity}</p>
+            <p><strong>Type:</strong> ${hatchlet.type}</p>
+            <p><strong>Personality:</strong> ${hatchlet.personality}</p>
+          </div>
+        `;
+      } else {
+        result.innerHTML = `<p style="color:#f87171;">❌ Invalid code... try again!</p>`;
       }
     }
   </script>
