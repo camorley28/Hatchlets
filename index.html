@@ -3,13 +3,41 @@
 <head>
   <title>Hatchlets</title>
 </head>
-<body style="text-align:center; font-family:Arial; padding:50px;">
-  <h1>Adopt Your Hatchlet</h1>
-  <p>Every Hatchlet comes to life online.</p>
-  <p>Enter your code and start your collection.</p>
 
-  <button style="padding:15px 30px; font-size:18px; cursor:pointer;">
-    Enter Your Code
-  </button>
+<body style="text-align:center; font-family:Arial; padding:40px; background:#0f172a; color:white;">
+
+  <h1 style="font-size:40px;">🐣 Hatchlets</h1>
+  <p style="font-size:20px;">Adopt. Hatch. Evolve.</p>
+
+  <div style="margin-top:40px;">
+    <input id="codeInput" placeholder="Enter Your Code"
+      style="padding:15px; font-size:18px; border-radius:8px; border:none;">
+    
+    <br><br>
+
+    <button onclick="redeemCode()"
+      style="padding:15px 30px; font-size:18px; cursor:pointer; border-radius:8px; background:#22c55e; border:none;">
+      Hatch Your Hatchlet
+    </button>
+  </div>
+
+  <p id="result" style="margin-top:30px; font-size:20px;"></p>
+
+  <script>
+    function redeemCode() {
+      const code = document.getElementById("codeInput").value;
+
+      if(code === "DRAGON123") {
+        document.getElementById("result").innerHTML = "🔥 You hatched a DRAGON Hatchlet!";
+      } 
+      else if(code === "AXOLOTL777") {
+        document.getElementById("result").innerHTML = "💧 You hatched an AXOLOTL Hatchlet!";
+      }
+      else {
+        document.getElementById("result").innerHTML = "❌ Invalid code... try again!";
+      }
+    }
+  </script>
+
 </body>
 </html>
