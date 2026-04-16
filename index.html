@@ -13,6 +13,8 @@
       color: white;
       text-align: center;
       padding: 40px 20px;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
 
     h1 {
@@ -32,6 +34,7 @@
       padding: 25px;
       max-width: 500px;
       margin: 0 auto;
+      box-shadow: 0 18px 50px rgba(0,0,0,0.22);
     }
 
     input {
@@ -41,6 +44,7 @@
       border: none;
       width: 80%;
       margin-bottom: 15px;
+      outline: none;
     }
 
     button {
@@ -52,26 +56,85 @@
       color: white;
       font-weight: bold;
       cursor: pointer;
+      transition: transform 0.15s ease, opacity 0.15s ease;
     }
 
     button:hover {
       opacity: 0.9;
+      transform: translateY(-1px);
     }
 
     .result {
       margin-top: 30px;
+      min-height: 180px;
     }
 
     .card {
       background: #111827;
       padding: 25px;
-      border-radius: 16px;
-      max-width: 450px;
+      border-radius: 20px;
+      max-width: 460px;
       margin: 0 auto;
+      box-shadow: 0 0 30px rgba(0,0,0,0.35);
+      animation: popIn 0.45s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card.common {
+      border: 2px solid #94a3b8;
+      box-shadow: 0 0 18px rgba(148,163,184,0.28);
+    }
+
+    .card.rare {
+      border: 2px solid #60a5fa;
+      box-shadow: 0 0 24px rgba(96,165,250,0.38);
+    }
+
+    .card.epic {
+      border: 2px solid #c084fc;
+      box-shadow: 0 0 28px rgba(192,132,252,0.4);
+    }
+
+    .card.legendary {
+      border: 2px solid #fbbf24;
+      box-shadow: 0 0 34px rgba(251,191,36,0.55);
     }
 
     .emoji {
-      font-size: 60px;
+      font-size: 64px;
+      margin-bottom: 8px;
+      animation: floaty 2s ease-in-out infinite;
+    }
+
+    .rarity-badge {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: bold;
+      font-size: 14px;
+      letter-spacing: 0.4px;
+    }
+
+    .badge-common {
+      background: rgba(148,163,184,0.18);
+      color: #cbd5e1;
+    }
+
+    .badge-rare {
+      background: rgba(96,165,250,0.18);
+      color: #bfdbfe;
+    }
+
+    .badge-epic {
+      background: rgba(192,132,252,0.18);
+      color: #e9d5ff;
+    }
+
+    .badge-legendary {
+      background: rgba(251,191,36,0.18);
+      color: #fde68a;
     }
 
     .btn-forever {
@@ -83,18 +146,85 @@
       color: white;
       text-decoration: none;
       font-weight: bold;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    .btn-forever:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
     }
 
     .error {
       color: #f87171;
       font-size: 18px;
+      animation: popIn 0.25s ease;
+    }
+
+    .hatching {
+      margin: 0 auto;
+      max-width: 420px;
+      padding: 28px 20px;
+      border-radius: 20px;
+      background: rgba(17,24,39,0.8);
+      box-shadow: 0 0 26px rgba(255,255,255,0.08);
+      animation: popIn 0.3s ease;
+    }
+
+    .egg {
+      font-size: 80px;
+      display: inline-block;
+      margin-bottom: 12px;
+      animation: shakeEgg 0.7s ease-in-out infinite;
+      filter: drop-shadow(0 0 15px rgba(255,255,255,0.2));
+    }
+
+    .hatch-text {
+      font-size: 20px;
+      color: #fde68a;
+      margin-top: 8px;
+      animation: pulseText 1s ease-in-out infinite;
+    }
+
+    .sparkles {
+      font-size: 28px;
+      margin-top: 6px;
+      animation: sparkleFlash 0.8s ease-in-out infinite;
+    }
+
+    @keyframes shakeEgg {
+      0% { transform: rotate(0deg) scale(1); }
+      20% { transform: rotate(-10deg) scale(1.03); }
+      40% { transform: rotate(8deg) scale(1.05); }
+      60% { transform: rotate(-6deg) scale(1.04); }
+      80% { transform: rotate(5deg) scale(1.02); }
+      100% { transform: rotate(0deg) scale(1); }
+    }
+
+    @keyframes pulseText {
+      0%, 100% { opacity: 0.65; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes sparkleFlash {
+      0%, 100% { opacity: 0.4; transform: scale(0.95); }
+      50% { opacity: 1; transform: scale(1.08); }
+    }
+
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.92) translateY(8px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
     }
   </style>
 </head>
 
 <body>
 
-  <h1>🐣 Hatchlets </h1>
+  <h1>🐣 Hatchlets</h1>
   <div class="tagline">Crack the code. Hatch your destiny.</div>
 
   <div class="box">
@@ -106,116 +236,130 @@
   <div id="result" class="result"></div>
 
   <script>
-
     const hatchletCodes = {
 
-       // AXOLOTLS
-"AXO-BUBBLES-1042": { species:"Axolotl", name:"Bubbles", rarity:"Epic", type:"Water", personality:"Playful", emoji:"🫧" },
-"AXO-MISTY-2817": { species:"Axolotl", name:"Misty", rarity:"Rare", type:"Mystic Water", personality:"Gentle", emoji:"🌊" },
-"AXO-RIPPLE-6632": { species:"Axolotl", name:"Ripple", rarity:"Common", type:"Water", personality:"Curious", emoji:"💧" },
-"AXO-PEARL-8891": { species:"Axolotl", name:"Pearl", rarity:"Rare", type:"Moon Water", personality:"Sweet", emoji:"🌙" },
-"AXO-LUNA-5821": { species:"Axolotl", name:"Luna", rarity:"Legendary", type:"Celestial", personality:"Magical", emoji:"✨" },
+      // AXOLOTLS
+      "AXO-BUBBLES-1042": { species:"Axolotl", name:"Bubbles", rarity:"Epic", type:"Water", personality:"Playful", emoji:"🫧" },
+      "AXO-MISTY-2817": { species:"Axolotl", name:"Misty", rarity:"Rare", type:"Mystic Water", personality:"Gentle", emoji:"🌊" },
+      "AXO-RIPPLE-6632": { species:"Axolotl", name:"Ripple", rarity:"Common", type:"Water", personality:"Curious", emoji:"💧" },
+      "AXO-PEARL-8891": { species:"Axolotl", name:"Pearl", rarity:"Rare", type:"Moon Water", personality:"Sweet", emoji:"🌙" },
+      "AXO-LUNA-5821": { species:"Axolotl", name:"Luna", rarity:"Legendary", type:"Celestial", personality:"Magical", emoji:"✨" },
 
-"AXO-BUBBLES-7772": { species:"Axolotl", name:"Bubbles", rarity:"Epic", type:"Water", personality:"Playful", emoji:"🫧" },
-"AXO-MISTY-4419": { species:"Axolotl", name:"Misty", rarity:"Rare", type:"Mystic Water", personality:"Gentle", emoji:"🌊" },
-"AXO-RIPPLE-9021": { species:"Axolotl", name:"Ripple", rarity:"Common", type:"Water", personality:"Curious", emoji:"💧" },
-"AXO-PEARL-2203": { species:"Axolotl", name:"Pearl", rarity:"Rare", type:"Moon Water", personality:"Sweet", emoji:"🌙" },
-"AXO-LUNA-8124": { species:"Axolotl", name:"Luna", rarity:"Legendary", type:"Celestial", personality:"Magical", emoji:"✨" },
+      "AXO-BUBBLES-7772": { species:"Axolotl", name:"Bubbles", rarity:"Epic", type:"Water", personality:"Playful", emoji:"🫧" },
+      "AXO-MISTY-4419": { species:"Axolotl", name:"Misty", rarity:"Rare", type:"Mystic Water", personality:"Gentle", emoji:"🌊" },
+      "AXO-RIPPLE-9021": { species:"Axolotl", name:"Ripple", rarity:"Common", type:"Water", personality:"Curious", emoji:"💧" },
+      "AXO-PEARL-2203": { species:"Axolotl", name:"Pearl", rarity:"Rare", type:"Moon Water", personality:"Sweet", emoji:"🌙" },
+      "AXO-LUNA-8124": { species:"Axolotl", name:"Luna", rarity:"Legendary", type:"Celestial", personality:"Magical", emoji:"✨" },
 
-"AXO-BUBBLES-1468": { species:"Axolotl", name:"Bubbles", rarity:"Epic", type:"Water", personality:"Playful", emoji:"🫧" },
-"AXO-MISTY-3574": { species:"Axolotl", name:"Misty", rarity:"Rare", type:"Mystic Water", personality:"Gentle", emoji:"🌊" },
-"AXO-RIPPLE-5186": { species:"Axolotl", name:"Ripple", rarity:"Common", type:"Water", personality:"Curious", emoji:"💧" },
-"AXO-PEARL-6297": { species:"Axolotl", name:"Pearl", rarity:"Rare", type:"Moon Water", personality:"Sweet", emoji:"🌙" },
-"AXO-LUNA-7315": { species:"Axolotl", name:"Luna", rarity:"Legendary", type:"Celestial", personality:"Magical", emoji:"✨" },
+      "AXO-BUBBLES-1468": { species:"Axolotl", name:"Bubbles", rarity:"Epic", type:"Water", personality:"Playful", emoji:"🫧" },
+      "AXO-MISTY-3574": { species:"Axolotl", name:"Misty", rarity:"Rare", type:"Mystic Water", personality:"Gentle", emoji:"🌊" },
+      "AXO-RIPPLE-5186": { species:"Axolotl", name:"Ripple", rarity:"Common", type:"Water", personality:"Curious", emoji:"💧" },
+      "AXO-PEARL-6297": { species:"Axolotl", name:"Pearl", rarity:"Rare", type:"Moon Water", personality:"Sweet", emoji:"🌙" },
+      "AXO-LUNA-7315": { species:"Axolotl", name:"Luna", rarity:"Legendary", type:"Celestial", personality:"Magical", emoji:"✨" },
 
-"AXO-BUBBLES-8426": { species:"Axolotl", name:"Bubbles", rarity:"Epic", type:"Water", personality:"Playful", emoji:"🫧" },
-"AXO-MISTY-9538": { species:"Axolotl", name:"Misty", rarity:"Rare", type:"Mystic Water", personality:"Gentle", emoji:"🌊" },
-"AXO-RIPPLE-1649": { species:"Axolotl", name:"Ripple", rarity:"Common", type:"Water", personality:"Curious", emoji:"💧" },
-"AXO-PEARL-2751": { species:"Axolotl", name:"Pearl", rarity:"Rare", type:"Moon Water", personality:"Sweet", emoji:"🌙" },
-"AXO-LUNA-3862": { species:"Axolotl", name:"Luna", rarity:"Legendary", type:"Celestial", personality:"Magical", emoji:"✨" },
+      "AXO-BUBBLES-8426": { species:"Axolotl", name:"Bubbles", rarity:"Epic", type:"Water", personality:"Playful", emoji:"🫧" },
+      "AXO-MISTY-9538": { species:"Axolotl", name:"Misty", rarity:"Rare", type:"Mystic Water", personality:"Gentle", emoji:"🌊" },
+      "AXO-RIPPLE-1649": { species:"Axolotl", name:"Ripple", rarity:"Common", type:"Water", personality:"Curious", emoji:"💧" },
+      "AXO-PEARL-2751": { species:"Axolotl", name:"Pearl", rarity:"Rare", type:"Moon Water", personality:"Sweet", emoji:"🌙" },
+      "AXO-LUNA-3862": { species:"Axolotl", name:"Luna", rarity:"Legendary", type:"Celestial", personality:"Magical", emoji:"✨" },
 
-"AXO-BUBBLES-4973": { species:"Axolotl", name:"Bubbles", rarity:"Epic", type:"Water", personality:"Playful", emoji:"🫧" },
-"AXO-MISTY-6084": { species:"Axolotl", name:"Misty", rarity:"Rare", type:"Mystic Water", personality:"Gentle", emoji:"🌊" },
-"AXO-RIPPLE-7195": { species:"Axolotl", name:"Ripple", rarity:"Common", type:"Water", personality:"Curious", emoji:"💧" },
-"AXO-PEARL-8206": { species:"Axolotl", name:"Pearl", rarity:"Rare", type:"Moon Water", personality:"Sweet", emoji:"🌙" },
-"AXO-LUNA-9317": { species:"Axolotl", name:"Luna", rarity:"Legendary", type:"Celestial", personality:"Magical", emoji:"✨" },
+      "AXO-BUBBLES-4973": { species:"Axolotl", name:"Bubbles", rarity:"Epic", type:"Water", personality:"Playful", emoji:"🫧" },
+      "AXO-MISTY-6084": { species:"Axolotl", name:"Misty", rarity:"Rare", type:"Mystic Water", personality:"Gentle", emoji:"🌊" },
+      "AXO-RIPPLE-7195": { species:"Axolotl", name:"Ripple", rarity:"Common", type:"Water", personality:"Curious", emoji:"💧" },
+      "AXO-PEARL-8206": { species:"Axolotl", name:"Pearl", rarity:"Rare", type:"Moon Water", personality:"Sweet", emoji:"🌙" },
+      "AXO-LUNA-9317": { species:"Axolotl", name:"Luna", rarity:"Legendary", type:"Celestial", personality:"Magical", emoji:"✨" },
 
-"AXO-BUBBLES-1429": { species:"Axolotl", name:"Bubbles", rarity:"Epic", type:"Water", personality:"Playful", emoji:"🫧" },
-"AXO-MISTY-2530": { species:"Axolotl", name:"Misty", rarity:"Rare", type:"Mystic Water", personality:"Gentle", emoji:"🌊" },
-"AXO-RIPPLE-3641": { species:"Axolotl", name:"Ripple", rarity:"Common", type:"Water", personality:"Curious", emoji:"💧" },
-"AXO-PEARL-4752": { species:"Axolotl", name:"Pearl", rarity:"Rare", type:"Moon Water", personality:"Sweet", emoji:"🌙" },
-"AXO-LUNA-5863": { species:"Axolotl", name:"Luna", rarity:"Legendary", type:"Celestial", personality:"Magical", emoji:"✨" },
+      "AXO-BUBBLES-1429": { species:"Axolotl", name:"Bubbles", rarity:"Epic", type:"Water", personality:"Playful", emoji:"🫧" },
+      "AXO-MISTY-2530": { species:"Axolotl", name:"Misty", rarity:"Rare", type:"Mystic Water", personality:"Gentle", emoji:"🌊" },
+      "AXO-RIPPLE-3641": { species:"Axolotl", name:"Ripple", rarity:"Common", type:"Water", personality:"Curious", emoji:"💧" },
+      "AXO-PEARL-4752": { species:"Axolotl", name:"Pearl", rarity:"Rare", type:"Moon Water", personality:"Sweet", emoji:"🌙" },
+      "AXO-LUNA-5863": { species:"Axolotl", name:"Luna", rarity:"Legendary", type:"Celestial", personality:"Magical", emoji:"✨" },
 
       // DRAGONS
-"DRG-LUMO-8831": { species:"Dragon", name:"Lumo", rarity:"Rare", type:"Fire", personality:"Bold", emoji:"🔥" },
-"DRG-EMBER-5520": { species:"Dragon", name:"Ember", rarity:"Epic", type:"Flame", personality:"Fierce", emoji:"🐉" },
-"DRG-BLAZE-7744": { species:"Dragon", name:"Blaze", rarity:"Common", type:"Fire", personality:"Energetic", emoji:"⚡" },
-"DRG-DRAKO-3392": { species:"Dragon", name:"Drako", rarity:"Rare", type:"Shadow Fire", personality:"Mischievous", emoji:"🌋" },
-"DRG-CINDER-9918": { species:"Dragon", name:"Cinder", rarity:"Legendary", type:"Ancient Flame", personality:"Loyal", emoji:"👑" },
+      "DRG-LUMO-8831": { species:"Dragon", name:"Lumo", rarity:"Rare", type:"Fire", personality:"Bold", emoji:"🔥" },
+      "DRG-EMBER-5520": { species:"Dragon", name:"Ember", rarity:"Epic", type:"Flame", personality:"Fierce", emoji:"🐉" },
+      "DRG-BLAZE-7744": { species:"Dragon", name:"Blaze", rarity:"Common", type:"Fire", personality:"Energetic", emoji:"⚡" },
+      "DRG-DRAKO-3392": { species:"Dragon", name:"Drako", rarity:"Rare", type:"Shadow Fire", personality:"Mischievous", emoji:"🌋" },
+      "DRG-CINDER-9918": { species:"Dragon", name:"Cinder", rarity:"Legendary", type:"Ancient Flame", personality:"Loyal", emoji:"👑" },
 
-"DRG-LUMO-1182": { species:"Dragon", name:"Lumo", rarity:"Rare", type:"Fire", personality:"Bold", emoji:"🔥" },
-"DRG-EMBER-6401": { species:"Dragon", name:"Ember", rarity:"Epic", type:"Flame", personality:"Fierce", emoji:"🐉" },
-"DRG-BLAZE-2238": { species:"Dragon", name:"Blaze", rarity:"Common", type:"Fire", personality:"Energetic", emoji:"⚡" },
-"DRG-DRAKO-7751": { species:"Dragon", name:"Drako", rarity:"Rare", type:"Shadow Fire", personality:"Mischievous", emoji:"🌋" },
-"DRG-CINDER-4502": { species:"Dragon", name:"Cinder", rarity:"Legendary", type:"Ancient Flame", personality:"Loyal", emoji:"👑" },
+      "DRG-LUMO-1182": { species:"Dragon", name:"Lumo", rarity:"Rare", type:"Fire", personality:"Bold", emoji:"🔥" },
+      "DRG-EMBER-6401": { species:"Dragon", name:"Ember", rarity:"Epic", type:"Flame", personality:"Fierce", emoji:"🐉" },
+      "DRG-BLAZE-2238": { species:"Dragon", name:"Blaze", rarity:"Common", type:"Fire", personality:"Energetic", emoji:"⚡" },
+      "DRG-DRAKO-7751": { species:"Dragon", name:"Drako", rarity:"Rare", type:"Shadow Fire", personality:"Mischievous", emoji:"🌋" },
+      "DRG-CINDER-4502": { species:"Dragon", name:"Cinder", rarity:"Legendary", type:"Ancient Flame", personality:"Loyal", emoji:"👑" },
 
-"DRG-LUMO-1627": { species:"Dragon", name:"Lumo", rarity:"Rare", type:"Fire", personality:"Bold", emoji:"🔥" },
-"DRG-EMBER-2738": { species:"Dragon", name:"Ember", rarity:"Epic", type:"Flame", personality:"Fierce", emoji:"🐉" },
-"DRG-BLAZE-3849": { species:"Dragon", name:"Blaze", rarity:"Common", type:"Fire", personality:"Energetic", emoji:"⚡" },
-"DRG-DRAKO-4951": { species:"Dragon", name:"Drako", rarity:"Rare", type:"Shadow Fire", personality:"Mischievous", emoji:"🌋" },
-"DRG-CINDER-5062": { species:"Dragon", name:"Cinder", rarity:"Legendary", type:"Ancient Flame", personality:"Loyal", emoji:"👑" },
+      "DRG-LUMO-1627": { species:"Dragon", name:"Lumo", rarity:"Rare", type:"Fire", personality:"Bold", emoji:"🔥" },
+      "DRG-EMBER-2738": { species:"Dragon", name:"Ember", rarity:"Epic", type:"Flame", personality:"Fierce", emoji:"🐉" },
+      "DRG-BLAZE-3849": { species:"Dragon", name:"Blaze", rarity:"Common", type:"Fire", personality:"Energetic", emoji:"⚡" },
+      "DRG-DRAKO-4951": { species:"Dragon", name:"Drako", rarity:"Rare", type:"Shadow Fire", personality:"Mischievous", emoji:"🌋" },
+      "DRG-CINDER-5062": { species:"Dragon", name:"Cinder", rarity:"Legendary", type:"Ancient Flame", personality:"Loyal", emoji:"👑" },
 
-"DRG-LUMO-6173": { species:"Dragon", name:"Lumo", rarity:"Rare", type:"Fire", personality:"Bold", emoji:"🔥" },
-"DRG-EMBER-7284": { species:"Dragon", name:"Ember", rarity:"Epic", type:"Flame", personality:"Fierce", emoji:"🐉" },
-"DRG-BLAZE-8395": { species:"Dragon", name:"Blaze", rarity:"Common", type:"Fire", personality:"Energetic", emoji:"⚡" },
-"DRG-DRAKO-9406": { species:"Dragon", name:"Drako", rarity:"Rare", type:"Shadow Fire", personality:"Mischievous", emoji:"🌋" },
-"DRG-CINDER-1518": { species:"Dragon", name:"Cinder", rarity:"Legendary", type:"Ancient Flame", personality:"Loyal", emoji:"👑" },
+      "DRG-LUMO-6173": { species:"Dragon", name:"Lumo", rarity:"Rare", type:"Fire", personality:"Bold", emoji:"🔥" },
+      "DRG-EMBER-7284": { species:"Dragon", name:"Ember", rarity:"Epic", type:"Flame", personality:"Fierce", emoji:"🐉" },
+      "DRG-BLAZE-8395": { species:"Dragon", name:"Blaze", rarity:"Common", type:"Fire", personality:"Energetic", emoji:"⚡" },
+      "DRG-DRAKO-9406": { species:"Dragon", name:"Drako", rarity:"Rare", type:"Shadow Fire", personality:"Mischievous", emoji:"🌋" },
+      "DRG-CINDER-1518": { species:"Dragon", name:"Cinder", rarity:"Legendary", type:"Ancient Flame", personality:"Loyal", emoji:"👑" },
 
-"DRG-LUMO-2629": { species:"Dragon", name:"Lumo", rarity:"Rare", type:"Fire", personality:"Bold", emoji:"🔥" },
-"DRG-EMBER-3740": { species:"Dragon", name:"Ember", rarity:"Epic", type:"Flame", personality:"Fierce", emoji:"🐉" },
-"DRG-BLAZE-4851": { species:"Dragon", name:"Blaze", rarity:"Common", type:"Fire", personality:"Energetic", emoji:"⚡" },
-"DRG-DRAKO-5962": { species:"Dragon", name:"Drako", rarity:"Rare", type:"Shadow Fire", personality:"Mischievous", emoji:"🌋" },
-"DRG-CINDER-6073": { species:"Dragon", name:"Cinder", rarity:"Legendary", type:"Ancient Flame", personality:"Loyal", emoji:"👑" },
+      "DRG-LUMO-2629": { species:"Dragon", name:"Lumo", rarity:"Rare", type:"Fire", personality:"Bold", emoji:"🔥" },
+      "DRG-EMBER-3740": { species:"Dragon", name:"Ember", rarity:"Epic", type:"Flame", personality:"Fierce", emoji:"🐉" },
+      "DRG-BLAZE-4851": { species:"Dragon", name:"Blaze", rarity:"Common", type:"Fire", personality:"Energetic", emoji:"⚡" },
+      "DRG-DRAKO-5962": { species:"Dragon", name:"Drako", rarity:"Rare", type:"Shadow Fire", personality:"Mischievous", emoji:"🌋" },
+      "DRG-CINDER-6073": { species:"Dragon", name:"Cinder", rarity:"Legendary", type:"Ancient Flame", personality:"Loyal", emoji:"👑" },
 
-"DRG-LUMO-7184": { species:"Dragon", name:"Lumo", rarity:"Rare", type:"Fire", personality:"Bold", emoji:"🔥" },
-"DRG-EMBER-8295": { species:"Dragon", name:"Ember", rarity:"Epic", type:"Flame", personality:"Fierce", emoji:"🐉" },
-"DRG-BLAZE-9306": { species:"Dragon", name:"Blaze", rarity:"Common", type:"Fire", personality:"Energetic", emoji:"⚡" },
-"DRG-DRAKO-1417": { species:"Dragon", name:"Drako", rarity:"Rare", type:"Shadow Fire", personality:"Mischievous", emoji:"🌋" },
-"DRG-CINDER-2528": { species:"Dragon", name:"Cinder", rarity:"Legendary", type:"Ancient Flame", personality:"Loyal", emoji:"👑" },
+      "DRG-LUMO-7184": { species:"Dragon", name:"Lumo", rarity:"Rare", type:"Fire", personality:"Bold", emoji:"🔥" },
+      "DRG-EMBER-8295": { species:"Dragon", name:"Ember", rarity:"Epic", type:"Flame", personality:"Fierce", emoji:"🐉" },
+      "DRG-BLAZE-9306": { species:"Dragon", name:"Blaze", rarity:"Common", type:"Fire", personality:"Energetic", emoji:"⚡" },
+      "DRG-DRAKO-1417": { species:"Dragon", name:"Drako", rarity:"Rare", type:"Shadow Fire", personality:"Mischievous", emoji:"🌋" },
+      "DRG-CINDER-2528": { species:"Dragon", name:"Cinder", rarity:"Legendary", type:"Ancient Flame", personality:"Loyal", emoji:"👑" }
     };
+
+    function rarityClass(rarity) {
+      return rarity.toLowerCase();
+    }
+
+    function badgeClass(rarity) {
+      return "badge-" + rarity.toLowerCase();
+    }
 
     function redeemCode() {
       const input = document.getElementById("codeInput").value.trim().toUpperCase();
       const result = document.getElementById("result");
       const hatchlet = hatchletCodes[input];
 
-      if (hatchlet) {
+      if (!hatchlet) {
+        result.innerHTML = `<div class="error">❌ Invalid code... try again!</div>`;
+        return;
+      }
+
+      result.innerHTML = `
+        <div class="hatching">
+          <div class="egg">🥚</div>
+          <div class="sparkles">✨ ✨ ✨</div>
+          <div class="hatch-text">Your Hatchlet is hatching...</div>
+        </div>
+      `;
+
+      setTimeout(() => {
         result.innerHTML = `
-          <div class="card">
+          <div class="card ${rarityClass(hatchlet.rarity)}">
+            <div class="rarity-badge ${badgeClass(hatchlet.rarity)}">${hatchlet.rarity}</div>
             <div class="emoji">${hatchlet.emoji}</div>
             <h2>${hatchlet.name} hatched!</h2>
             <p><strong>Species:</strong> ${hatchlet.species}</p>
             <p><strong>Rarity:</strong> ${hatchlet.rarity}</p>
             <p><strong>Type:</strong> ${hatchlet.type}</p>
             <p><strong>Personality:</strong> ${hatchlet.personality}</p>
-
-            <a href="foreverland.html" class="btn-forever">
-              Enter ForeverLand
-            </a>
+            <a href="foreverland.html" class="btn-forever">Enter ForeverLand</a>
           </div>
         `;
-      } else {
-        result.innerHTML = `<div class="error">❌ Invalid code... try again!</div>`;
-      }
+      }, 1400);
     }
 
-    // ENTER KEY SUPPORT
     document.getElementById("codeInput").addEventListener("keypress", function(e) {
       if (e.key === "Enter") {
         redeemCode();
       }
     });
-
   </script>
 
 </body>
