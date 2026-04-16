@@ -15,7 +15,20 @@
 
     <br><br>
 
-    <button onclick="redeemCode()"
+    <button onclick="redeemCode()"result.innerHTML = `
+  <div style="background:#111827; max-width:500px; margin:0 auto; padding:25px; border-radius:16px;">
+    <div style="font-size:50px;">${hatchlet.emoji}</div>
+    <h2>${hatchlet.name} hatched!</h2>
+    <p><strong>Species:</strong> ${hatchlet.species}</p>
+    <p><strong>Rarity:</strong> ${hatchlet.rarity}</p>
+    <p><strong>Type:</strong> ${hatchlet.type}</p>
+    <p><strong>Personality:</strong> ${hatchlet.personality}</p>
+    <br>
+    <a href="foreverland.html" style="display:inline-block; background:#8b5cf6; color:white; text-decoration:none; padding:14px 22px; border-radius:12px; font-weight:bold;">
+      Enter ForeverLand
+    </a>
+  </div>
+`;
       style="padding:15px 30px; font-size:18px; cursor:pointer; border-radius:8px; background:#22c55e; border:none;">
       Hatch Your Hatchlet
     </button>
