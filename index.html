@@ -340,19 +340,22 @@
       `;
 
       setTimeout(() => {
-        result.innerHTML = `
-          <div class="card ${rarityClass(hatchlet.rarity)}">
-            <div class="rarity-badge ${badgeClass(hatchlet.rarity)}">${hatchlet.rarity}</div>
-            <div class="emoji">${hatchlet.emoji}</div>
-            <h2>${hatchlet.name} hatched!</h2>
-            <p><strong>Species:</strong> ${hatchlet.species}</p>
-            <p><strong>Rarity:</strong> ${hatchlet.rarity}</p>
-            <p><strong>Type:</strong> ${hatchlet.type}</p>
-            <p><strong>Personality:</strong> ${hatchlet.personality}</p>
-           <a href="foreverland.html?name=${hatchlet.name}" class="btn-forever">
-          </div>
-        `;
-      }, 1400);
+  result.innerHTML = `
+    <div class="card ${rarityClass(hatchlet.rarity)}">
+      <div class="rarity-badge ${badgeClass(hatchlet.rarity)}">${hatchlet.rarity}</div>
+      <div class="emoji">${hatchlet.emoji}</div>
+      <h2>${hatchlet.name} hatched!</h2>
+      <p><strong>Species:</strong> ${hatchlet.species}</p>
+      <p><strong>Rarity:</strong> ${hatchlet.rarity}</p>
+      <p><strong>Type:</strong> ${hatchlet.type}</p>
+      <p><strong>Personality:</strong> ${hatchlet.personality}</p>
+
+      <a href="foreverland.html?name=${hatchlet.name}" class="btn-forever">
+        Enter ForeverLand
+      </a>
+    </div>
+  `;
+}, 1400);
     }
 
     document.getElementById("codeInput").addEventListener("keypress", function(e) {
