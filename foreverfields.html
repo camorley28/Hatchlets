@@ -395,24 +395,33 @@
     const params = new URLSearchParams(window.location.search);
     const hatchName = params.get("name") || "Hatchlet";
 
-    const hatchletVisuals = {
-      Lumo: "🔥",
-      Ember: "🐉",
-      Blaze: "⚡",
-      Drako: "🌋",
-      Cinder: "👑",
-      Bubbles: "🫧",
-      Misty: "🌊",
-      Ripple: "💧",
-      Pearl: "🌙",
-      Luna: "✨"
-    };
+   const hatchletData = {
+  Lumo:   { species: "Dragon",   emoji: "🐉", glow: "#f97316" },
+  Ember:  { species: "Dragon",   emoji: "🐉", glow: "#ef4444" },
+  Blaze:  { species: "Dragon",   emoji: "🐉", glow: "#f59e0b" },
+  Drako:  { species: "Dragon",   emoji: "🐉", glow: "#7c3aed" },
+  Cinder: { species: "Dragon",   emoji: "🐉", glow: "#fbbf24" },
 
-    const player = {
-      x: 2,
-      y: 2,
-      emoji: hatchletVisuals[hatchName] || "🐉"
-    };
+  Bubbles:{ species: "Axolotl",  emoji: "🦎", glow: "#22d3ee" },
+  Misty:  { species: "Axolotl",  emoji: "🦎", glow: "#60a5fa" },
+  Ripple: { species: "Axolotl",  emoji: "🦎", glow: "#38bdf8" },
+  Pearl:  { species: "Axolotl",  emoji: "🦎", glow: "#c084fc" },
+  Luna:   { species: "Axolotl",  emoji: "🦎", glow: "#e879f9" }
+};
+
+const currentHatchlet = hatchletData[hatchName] || {
+  species: "Dragon",
+  emoji: "🐉",
+  glow: "#f97316"
+};
+
+const player = {
+  x: 2,
+  y: 2,
+  emoji: currentHatchlet.emoji,
+  species: currentHatchlet.species,
+  glow: currentHatchlet.glow
+};
 
     const itemTable = [
       { type: "crystal", emoji: "💎", count: 6, coins: 4, xp: 4 },
