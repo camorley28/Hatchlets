@@ -501,20 +501,20 @@ const player = {
       setDaltonText(tip);
     }
 
-    function updateHUD() {
-      document.getElementById("petName").textContent = save.name;
-      document.getElementById("coins").textContent = save.coins;
-      document.getElementById("xp").textContent = `${save.xp} / ${save.level * 20}`;
-      document.getElementById("level").textContent = save.level;
-      document.getElementById("energy").textContent = save.energy;
-      document.getElementById("streak").textContent = save.streak;
+   function updateHUD() {
+  document.getElementById("petName").textContent = save.name;
+  document.getElementById("petSpecies").textContent = currentHatchlet.species;
+  document.getElementById("coins").textContent = save.coins;
+  document.getElementById("xp").textContent = `${save.xp} / ${save.level * 20}`;
+  document.getElementById("level").textContent = save.level;
+  document.getElementById("energy").textContent = save.energy;
+  document.getElementById("streak").textContent = save.streak;
 
-      document.getElementById("invCrystals").textContent = save.inventory.crystals;
-      document.getElementById("invStars").textContent = save.inventory.stars;
-      document.getElementById("invFruit").textContent = save.inventory.fruit;
-      document.getElementById("invEggs").textContent = save.inventory.eggs;
-    }
-
+  document.getElementById("invCrystals").textContent = save.inventory.crystals;
+  document.getElementById("invStars").textContent = save.inventory.stars;
+  document.getElementById("invFruit").textContent = save.inventory.fruit;
+  document.getElementById("invEggs").textContent = save.inventory.eggs;
+}
     function renderQuests() {
       const list = document.getElementById("questList");
       list.innerHTML = "";
