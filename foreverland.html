@@ -465,63 +465,66 @@
     </div>
   </div>
 
-  <script>
-    const daltonLines = [
-      "Hi, friend! I’m Dalton, and I’ve been waiting for you. Welcome to ForeverLand!",
-      "In ForeverLand, every Hatchlet has a story... and now your story begins too.",
-      "Some Hatchlets are playful, some are brave, and some are unbelievably rare.",
-      "Collect, explore, grow stronger, and remember... forever is everywhere.",
-      "Your Hatchlet isn’t just a toy. It’s your companion in a magical world."
-    ];
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const hatchName = urlParams.get("name") || "your Hatchlet";
 
-    let lineIndex = 0;
+  const daltonLines = [
+    `Whoa… I felt that magic from here. You just hatched ${hatchName}, didn’t you?`,
+    `${hatchName} is special… I can tell already.`,
+    `In ForeverLand, every Hatchlet has a story — and now yours begins.`,
+    `Take care of ${hatchName}. They’re part of your journey now.`,
+    `Welcome to ForeverLand… where forever is everywhere.`
+  ];
 
-    const speechText = document.getElementById("speechText");
-    const speechCount = document.getElementById("speechCount");
-    const prevBtn = document.getElementById("prevBtn");
-    const nextBtn = document.getElementById("nextBtn");
-    const mouth = document.getElementById("daltonMouth");
+  let lineIndex = 0;
 
-    function talkAnimation() {
-      mouth.classList.remove("mouth-rest");
-      mouth.classList.add("mouth-open");
+  const speechText = document.getElementById("speechText");
+  const speechCount = document.getElementById("speechCount");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const mouth = document.getElementById("daltonMouth");
 
-      setTimeout(() => {
-        mouth.classList.remove("mouth-open");
-        mouth.classList.add("mouth-rest");
-      }, 900);
+  function talkAnimation() {
+    mouth.classList.add("mouth-open");
+
+    setTimeout(() => {
+      mouth.classList.remove("mouth-open");
+    }, 1000);
+  }
+
+  function updateSpeech() {
+    speechText.style.opacity = 0;
+
+    setTimeout(() => {
+      speechText.textContent = daltonLines[lineIndex];
+      speechText.style.opacity = 1;
+
+      speechCount.textContent = `${lineIndex + 1} / ${daltonLines.length}`;
+
+      prevBtn.disabled = lineIndex === 0;
+      nextBtn.disabled = lineIndex === daltonLines.length - 1;
+
+      talkAnimation();
+    }, 200);
+  }
+
+  prevBtn.addEventListener("click", () => {
+    if (lineIndex > 0) {
+      lineIndex--;
+      updateSpeech();
     }
+  });
 
-    function updateSpeech() {
-      speechText.style.opacity = 0;
-
-      setTimeout(() => {
-        speechText.textContent = daltonLines[lineIndex];
-        speechText.style.opacity = 1;
-        speechCount.textContent = `${lineIndex + 1} / ${daltonLines.length}`;
-
-        prevBtn.disabled = lineIndex === 0;
-        nextBtn.disabled = lineIndex === daltonLines.length - 1;
-
-        talkAnimation();
-      }, 180);
+  nextBtn.addEventListener("click", () => {
+    if (lineIndex < daltonLines.length - 1) {
+      lineIndex++;
+      updateSpeech();
     }
+  });
 
-    prevBtn.addEventListener("click", () => {
-      if (lineIndex > 0) {
-        lineIndex--;
-        updateSpeech();
-      }
-    });
-
-    nextBtn.addEventListener("click", () => {
-      if (lineIndex < daltonLines.length - 1) {
-        lineIndex++;
-        updateSpeech();
-      }
-    });
-
-    updateSpeech();
-  </script>
+  updateSpeech();
+</script>
+  
 </body>
 </html>
