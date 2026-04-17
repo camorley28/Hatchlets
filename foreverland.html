@@ -85,29 +85,29 @@
       position: absolute;
       inset: 0;
       filter: blur(28px);
-      background: radial-gradient(circle, rgba(251,191,36,0.35), rgba(236,72,153,0.12), transparent 70%);
+      background: radial-gradient(circle, rgba(251,191,36,0.35), rgba(236,72,153,0.14), transparent 70%);
       transform: scale(1.35);
       z-index: 0;
       animation: pulseGlow 2.5s ease-in-out infinite;
     }
 
-    .dalton {
+    .dalton-svg {
       position: relative;
       z-index: 1;
-      font-size: 92px;
-      display: inline-block;
+      width: 170px;
+      max-width: 42vw;
       animation: floaty 2.6s ease-in-out infinite;
-      transform-origin: center;
+      filter: drop-shadow(0 10px 16px rgba(0,0,0,0.25));
     }
 
     .speech {
       position: relative;
-      max-width: 620px;
+      max-width: 650px;
       margin: 0 auto 20px;
       background: rgba(15,23,42,0.75);
       border: 1px solid rgba(255,255,255,0.12);
       border-radius: 22px;
-      padding: 18px 20px;
+      padding: 18px 20px 20px;
       box-shadow: 0 10px 28px rgba(0,0,0,0.2);
       animation: popIn 0.9s ease;
     }
@@ -140,12 +140,47 @@
       line-height: 1.6;
       color: #eef2ff;
       min-height: 96px;
+      transition: opacity 0.2s ease;
     }
 
-    .welcome {
-      font-size: 28px;
+    .speech-controls {
+      margin-top: 16px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .arrow-btn {
+      border: none;
+      border-radius: 999px;
+      width: 46px;
+      height: 46px;
+      font-size: 22px;
       font-weight: bold;
-      margin-bottom: 12px;
+      cursor: pointer;
+      background: linear-gradient(90deg, #f59e0b, #ec4899);
+      color: white;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.22);
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    .arrow-btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.95;
+    }
+
+    .arrow-btn:disabled {
+      opacity: 0.4;
+      cursor: default;
+      transform: none;
+    }
+
+    .speech-count {
+      font-size: 14px;
+      color: #cbd5e1;
+      min-width: 70px;
     }
 
     .message {
@@ -234,6 +269,20 @@
       color: #cbd5e1;
     }
 
+    .mouth-open {
+      animation: talkOpen 0.22s ease-in-out infinite alternate;
+      transform-origin: center;
+    }
+
+    .mouth-rest {
+      animation: none;
+    }
+
+    @keyframes talkOpen {
+      0% { transform: scaleY(0.9); }
+      100% { transform: scaleY(1.25); }
+    }
+
     @keyframes floaty {
       0%, 100% { transform: translateY(0px) rotate(0deg); }
       50% { transform: translateY(-8px) rotate(-2deg); }
@@ -273,16 +322,8 @@
         font-size: 18px;
       }
 
-      .welcome {
-        font-size: 23px;
-      }
-
       .message {
         font-size: 16px;
-      }
-
-      .dalton {
-        font-size: 74px;
       }
 
       .speech-text {
@@ -304,13 +345,79 @@
     <div class="hero-card">
       <div class="dalton-wrap">
         <div class="dalton-glow"></div>
-        <div class="dalton" id="daltonFace">🐉</div>
+
+        <svg class="dalton-svg" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" aria-label="Dalton the Dragon">
+          <defs>
+            <linearGradient id="daltonBody" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#FDBA74"/>
+              <stop offset="100%" stop-color="#F97316"/>
+            </linearGradient>
+            <linearGradient id="daltonBelly" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#FDE68A"/>
+              <stop offset="100%" stop-color="#FCA5A5"/>
+            </linearGradient>
+            <linearGradient id="wingGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#C084FC"/>
+              <stop offset="100%" stop-color="#60A5FA"/>
+            </linearGradient>
+          </defs>
+
+          <!-- wings -->
+          <path d="M52 120 C25 95, 22 68, 50 58 C74 50, 96 68, 98 94 C89 104, 73 115, 52 120Z" fill="url(#wingGrad)" opacity="0.9"/>
+          <path d="M168 120 C195 95, 198 68, 170 58 C146 50, 124 68, 122 94 C131 104, 147 115, 168 120Z" fill="url(#wingGrad)" opacity="0.9"/>
+
+          <!-- tail -->
+          <path d="M153 164 C180 168, 194 181, 185 196 C176 208, 151 204, 138 188" fill="none" stroke="#F97316" stroke-width="18" stroke-linecap="round"/>
+          <path d="M183 195 L198 189 L192 206 Z" fill="#FDE68A"/>
+
+          <!-- body -->
+          <ellipse cx="110" cy="128" rx="58" ry="50" fill="url(#daltonBody)"/>
+
+          <!-- belly -->
+          <ellipse cx="110" cy="138" rx="30" ry="32" fill="url(#daltonBelly)"/>
+
+          <!-- feet -->
+          <ellipse cx="84" cy="177" rx="15" ry="10" fill="#F97316"/>
+          <ellipse cx="136" cy="177" rx="15" ry="10" fill="#F97316"/>
+
+          <!-- head -->
+          <circle cx="110" cy="78" r="42" fill="url(#daltonBody)"/>
+
+          <!-- horns -->
+          <path d="M84 42 L76 20 L96 36 Z" fill="#FDE68A"/>
+          <path d="M136 42 L144 20 L124 36 Z" fill="#FDE68A"/>
+
+          <!-- cheeks -->
+          <circle cx="81" cy="89" r="7" fill="#FCA5A5" opacity="0.7"/>
+          <circle cx="139" cy="89" r="7" fill="#FCA5A5" opacity="0.7"/>
+
+          <!-- eyes -->
+          <circle cx="94" cy="74" r="7" fill="#111827"/>
+          <circle cx="126" cy="74" r="7" fill="#111827"/>
+          <circle cx="96" cy="71" r="2" fill="white"/>
+          <circle cx="128" cy="71" r="2" fill="white"/>
+
+          <!-- smile -->
+          <path d="M96 96 Q110 108 124 96" fill="none" stroke="#7C2D12" stroke-width="4" stroke-linecap="round"/>
+
+          <!-- mouth -->
+          <ellipse id="daltonMouth" cx="110" cy="100" rx="9" ry="5.5" fill="#7C2D12" class="mouth-rest"/>
+
+          <!-- little spark -->
+          <path d="M154 48l4 10 10 4-10 4-4 10-4-10-10-4 10-4 4-10Z" fill="#FDE68A"/>
+        </svg>
       </div>
 
       <div class="speech">
         <div class="speech-name">Dalton the Dragon</div>
         <div class="speech-text" id="speechText">
           Hi, friend! I’m Dalton, and I’ve been waiting for you. Welcome to ForeverLand!
+        </div>
+
+        <div class="speech-controls">
+          <button class="arrow-btn" id="prevBtn" aria-label="Previous">←</button>
+          <div class="speech-count" id="speechCount">1 / 5</div>
+          <button class="arrow-btn" id="nextBtn" aria-label="Next">→</button>
         </div>
       </div>
 
@@ -361,27 +468,60 @@
   <script>
     const daltonLines = [
       "Hi, friend! I’m Dalton, and I’ve been waiting for you. Welcome to ForeverLand!",
-      "In ForeverLand, every Hatchlet has a story… and now your story begins too.",
+      "In ForeverLand, every Hatchlet has a story... and now your story begins too.",
       "Some Hatchlets are playful, some are brave, and some are unbelievably rare.",
       "Collect, explore, grow stronger, and remember... forever is everywhere.",
       "Your Hatchlet isn’t just a toy. It’s your companion in a magical world."
     ];
 
     let lineIndex = 0;
-    const speechText = document.getElementById("speechText");
-    const daltonFace = document.getElementById("daltonFace");
 
-    setInterval(() => {
-      lineIndex = (lineIndex + 1) % daltonLines.length;
+    const speechText = document.getElementById("speechText");
+    const speechCount = document.getElementById("speechCount");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const mouth = document.getElementById("daltonMouth");
+
+    function talkAnimation() {
+      mouth.classList.remove("mouth-rest");
+      mouth.classList.add("mouth-open");
+
+      setTimeout(() => {
+        mouth.classList.remove("mouth-open");
+        mouth.classList.add("mouth-rest");
+      }, 900);
+    }
+
+    function updateSpeech() {
       speechText.style.opacity = 0;
 
       setTimeout(() => {
         speechText.textContent = daltonLines[lineIndex];
         speechText.style.opacity = 1;
-      }, 250);
+        speechCount.textContent = `${lineIndex + 1} / ${daltonLines.length}`;
 
-      daltonFace.textContent = lineIndex % 2 === 0 ? "🐉" : "✨🐉";
-    }, 3500);
+        prevBtn.disabled = lineIndex === 0;
+        nextBtn.disabled = lineIndex === daltonLines.length - 1;
+
+        talkAnimation();
+      }, 180);
+    }
+
+    prevBtn.addEventListener("click", () => {
+      if (lineIndex > 0) {
+        lineIndex--;
+        updateSpeech();
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (lineIndex < daltonLines.length - 1) {
+        lineIndex++;
+        updateSpeech();
+      }
+    });
+
+    updateSpeech();
   </script>
 </body>
 </html>
