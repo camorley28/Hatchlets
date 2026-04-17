@@ -18,22 +18,22 @@
     .page {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 20px;
+      padding: 16px;
     }
 
     .topbar {
       display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 16px;
-      margin-bottom: 18px;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 14px;
+      margin-bottom: 14px;
     }
 
     .panel {
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 20px;
-      padding: 16px;
-      box-shadow: 0 16px 36px rgba(0,0,0,0.2);
+      border-radius: 18px;
+      padding: 14px;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.22);
       backdrop-filter: blur(8px);
     }
 
@@ -44,7 +44,7 @@
     }
 
     .brand img {
-      width: 72px;
+      width: 68px;
       height: auto;
       display: block;
       filter: drop-shadow(0 8px 14px rgba(0,0,0,0.25));
@@ -52,29 +52,30 @@
 
     .brand h1 {
       margin: 0;
-      font-size: 34px;
+      font-size: 30px;
     }
 
     .brand p {
       margin: 4px 0 0;
       color: #dbeafe;
+      font-size: 14px;
     }
 
     .stats {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 10px;
     }
 
     .stat {
-      background: rgba(15,23,42,0.45);
+      background: rgba(15,23,42,0.5);
       border-radius: 14px;
-      padding: 10px 12px;
+      padding: 10px;
       text-align: center;
     }
 
     .stat .label {
-      font-size: 12px;
+      font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: #cbd5e1;
@@ -89,106 +90,37 @@
     .game-layout {
       display: grid;
       grid-template-columns: 1fr 320px;
-      gap: 18px;
+      gap: 16px;
       align-items: start;
     }
 
     .game-wrap {
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 24px;
-      padding: 16px;
+      border-radius: 20px;
+      padding: 14px;
       box-shadow: 0 16px 36px rgba(0,0,0,0.2);
     }
 
     .canvas-wrap {
-      background: rgba(15,23,42,0.55);
-      border-radius: 18px;
-      padding: 12px;
+      background: rgba(15,23,42,0.56);
+      border-radius: 16px;
+      padding: 10px;
     }
 
     canvas {
       width: 100%;
-      max-width: 100%;
       display: block;
       background: linear-gradient(180deg, #87ceeb 0%, #b9f3ff 22%, #79c267 22%, #5fab53 100%);
-      border-radius: 16px;
+      border-radius: 14px;
       image-rendering: pixelated;
     }
 
     .controls {
-      margin-top: 12px;
+      margin-top: 10px;
       color: #dbeafe;
       font-size: 14px;
       text-align: center;
-    }
-
-    .side {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .dalton-box {
-      text-align: center;
-    }
-
-    .dalton-box img {
-      width: 110px;
-      display: block;
-      margin: 0 auto 10px;
-      animation: floaty 3s ease-in-out infinite;
-    }
-
-    .dalton-title {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 8px;
-      color: #fde68a;
-    }
-
-    .dalton-text {
-      font-size: 15px;
-      line-height: 1.6;
-      color: #eef2ff;
-      min-height: 72px;
-    }
-
-    .quest-list {
-      display: grid;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .quest {
-      background: rgba(15,23,42,0.45);
-      border-radius: 14px;
-      padding: 12px;
-      font-size: 14px;
-    }
-
-    .quest.done {
-      outline: 2px solid rgba(34,197,94,0.7);
-    }
-
-    .inventory-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .item-box {
-      background: rgba(15,23,42,0.45);
-      border-radius: 14px;
-      padding: 12px;
-      text-align: center;
-    }
-
-    .item-box .num {
-      font-size: 24px;
-      font-weight: bold;
-      margin-top: 6px;
     }
 
     .bottom-buttons {
@@ -207,6 +139,12 @@
       font-weight: bold;
       cursor: pointer;
       flex: 1 1 120px;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      opacity: 0.95;
     }
 
     .btn.secondary {
@@ -214,8 +152,110 @@
       border: 1px solid rgba(255,255,255,0.14);
     }
 
+    .side {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .dalton-box {
+      text-align: center;
+    }
+
+    .dalton-box img {
+      width: 100px;
+      display: block;
+      margin: 0 auto 10px;
+      animation: floaty 3s ease-in-out infinite;
+    }
+
+    .dalton-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #fde68a;
+    }
+
+    .dalton-text {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #eef2ff;
+      min-height: 72px;
+    }
+
+    .section-title {
+      font-size: 17px;
+      font-weight: bold;
+      color: #fde68a;
+      margin-bottom: 10px;
+    }
+
+    .quest-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .quest {
+      background: rgba(15,23,42,0.48);
+      border-radius: 14px;
+      padding: 12px;
+      font-size: 14px;
+      text-align: left;
+      border: 1px solid transparent;
+    }
+
+    .quest.done {
+      border-color: rgba(34,197,94,0.85);
+      background: rgba(22,101,52,0.28);
+    }
+
+    .inventory-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .item-box {
+      background: rgba(15,23,42,0.48);
+      border-radius: 14px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .item-box .num {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 6px;
+    }
+
+    .zone-tag {
+      display: inline-block;
+      background: rgba(34,197,94,0.16);
+      color: #bbf7d0;
+      border: 1px solid rgba(34,197,94,0.24);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      margin-top: 8px;
+    }
+
+    .popup {
+      position: fixed;
+      left: 50%;
+      top: 18%;
+      transform: translateX(-50%);
+      background: gold;
+      color: black;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-weight: bold;
+      display: none;
+      z-index: 20;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+
     .note {
-      margin-top: 12px;
+      margin-top: 10px;
       color: #cbd5e1;
       font-size: 13px;
       text-align: center;
@@ -226,15 +266,25 @@
       50% { transform: translateY(-8px); }
     }
 
-    @media (max-width: 920px) {
+    @media (max-width: 960px) {
       .topbar,
       .game-layout {
         grid-template-columns: 1fr;
       }
 
+      .stats {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
       .brand {
         flex-direction: column;
         text-align: center;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
   </style>
@@ -247,7 +297,8 @@
           <img src="dalton-dragon.png" alt="Dalton the Dragon" />
           <div>
             <h1>ForeverFields</h1>
-            <p>Explore, collect, level up, and grow your Hatchlet’s world.</p>
+            <p>Explore, collect, level up, and build a forever adventure with your Hatchlet.</p>
+            <div class="zone-tag">Zone 1: ForeverFields</div>
           </div>
         </div>
       </div>
@@ -256,7 +307,7 @@
         <div class="stats">
           <div class="stat">
             <div class="label">Hatchlet</div>
-            <div class="value" id="petName">Lumo</div>
+            <div class="value" id="petName">Hatchlet</div>
           </div>
           <div class="stat">
             <div class="label">Level</div>
@@ -270,6 +321,14 @@
             <div class="label">Coins</div>
             <div class="value" id="coins">0</div>
           </div>
+          <div class="stat">
+            <div class="label">Energy</div>
+            <div class="value" id="energy">100</div>
+          </div>
+          <div class="stat">
+            <div class="label">Streak</div>
+            <div class="value" id="streak">1</div>
+          </div>
         </div>
       </div>
     </div>
@@ -279,15 +338,21 @@
         <div class="canvas-wrap">
           <canvas id="game" width="640" height="480"></canvas>
         </div>
+
         <div class="controls">
-          Move with <strong>Arrow Keys</strong> or <strong>WASD</strong>. Collect crystals, stars, fruit, and mystery eggs.
+          Move with <strong>Arrow Keys</strong> or <strong>WASD</strong>. Collect magical items, earn XP, complete quests.
         </div>
+
         <div class="bottom-buttons">
-          <button class="btn" onclick="resetWorld()">Respawn World</button>
+          <button class="btn" onclick="resetZone()">Respawn Zone</button>
           <button class="btn secondary" onclick="showTip()">Dalton Tip</button>
+          <button class="btn secondary" onclick="claimDailyReward()">Daily Reward</button>
           <button class="btn secondary" onclick="window.location.href='foreverland.html'">Back to ForeverLand</button>
         </div>
-        <div class="note">This is your first playable ForeverFields build. We can add saving, nest decorating, and evolution next.</div>
+
+        <div class="note">
+          This version is built to grow forever: more zones, more Hatchlets, more quests, more rewards.
+        </div>
       </div>
 
       <div class="side">
@@ -295,21 +360,17 @@
           <img src="dalton-dragon.png" alt="Dalton the Dragon" />
           <div class="dalton-title">Dalton’s Guide</div>
           <div class="dalton-text" id="daltonText">
-            Welcome to ForeverFields! Walk around, collect magical items, and grow your Hatchlet stronger.
+            Welcome to ForeverFields! Explore, collect, and grow your Hatchlet stronger every time you play.
           </div>
         </div>
 
         <div class="panel">
-          <div class="dalton-title">Today’s Quests</div>
-          <div class="quest-list">
-            <div class="quest" id="questCrystals">Collect 3 crystals</div>
-            <div class="quest" id="questStars">Collect 2 stars</div>
-            <div class="quest" id="questEgg">Find 1 mystery egg</div>
-          </div>
+          <div class="section-title">Today’s Quests</div>
+          <div class="quest-list" id="questList"></div>
         </div>
 
         <div class="panel">
-          <div class="dalton-title">Inventory</div>
+          <div class="section-title">Inventory</div>
           <div class="inventory-grid">
             <div class="item-box">💎 Crystals<div class="num" id="invCrystals">0</div></div>
             <div class="item-box">⭐ Stars<div class="num" id="invStars">0</div></div>
@@ -321,6 +382,8 @@
     </div>
   </div>
 
+  <div class="popup" id="popupMessage">Level Up!</div>
+
   <script>
     const canvas = document.getElementById("game");
     const ctx = canvas.getContext("2d");
@@ -329,33 +392,65 @@
     const cols = canvas.width / tile;
     const rows = canvas.height / tile;
 
+    const params = new URLSearchParams(window.location.search);
+    const hatchName = params.get("name") || "Hatchlet";
+
+    const hatchletVisuals = {
+      Lumo: "🔥",
+      Ember: "🐉",
+      Blaze: "⚡",
+      Drako: "🌋",
+      Cinder: "👑",
+      Bubbles: "🫧",
+      Misty: "🌊",
+      Ripple: "💧",
+      Pearl: "🌙",
+      Luna: "✨"
+    };
+
     const player = {
       x: 2,
       y: 2,
-      color: "#ef4444",
-      emoji: "🐾"
+      emoji: hatchletVisuals[hatchName] || "🐉"
     };
 
-    const inventory = {
-      crystals: 0,
-      stars: 0,
-      fruit: 0,
-      eggs: 0,
-      coins: 0,
-      xp: 0,
-      level: 1
-    };
-
-    const keys = {};
-    let items = [];
+    const itemTable = [
+      { type: "crystal", emoji: "💎", count: 6, coins: 4, xp: 4 },
+      { type: "star", emoji: "⭐", count: 4, coins: 6, xp: 6 },
+      { type: "fruit", emoji: "🍎", count: 5, coins: 2, xp: 2 },
+      { type: "egg", emoji: "🥚", count: 2, coins: 10, xp: 10 }
+    ];
 
     const daltonTips = [
-      "Try grabbing crystals first. They’re great for early XP.",
+      "Try collecting stars first. They’re packed with magic.",
       "Mystery eggs are rare. If you see one, go get it.",
-      "Stars are extra magical. They help you level faster.",
-      "The portal house is your future nest zone.",
-      "Collecting a little every day is how legends begin."
+      "Come back daily for more rewards and progress.",
+      "Every quest completed helps your Hatchlet grow.",
+      "ForeverFields is only the beginning... more zones will come."
     ];
+
+    const todayKey = new Date().toISOString().slice(0, 10);
+    const storageKey = `hatchletSave_${hatchName}`;
+
+    let save = JSON.parse(localStorage.getItem(storageKey)) || {
+      name: hatchName,
+      coins: 0,
+      xp: 0,
+      level: 1,
+      energy: 100,
+      streak: 1,
+      inventory: {
+        crystals: 0,
+        stars: 0,
+        fruit: 0,
+        eggs: 0
+      },
+      quests: generateFreshQuests(),
+      lastDailyClaim: null
+    };
+
+    let items = [];
+    const keys = {};
 
     function randomGridPos() {
       return {
@@ -364,16 +459,105 @@
       };
     }
 
+    function generateFreshQuests() {
+      return [
+        { id: "collect_crystals", label: "Collect 3 crystals", goal: 3, progress: 0, type: "crystals", done: false },
+        { id: "collect_stars", label: "Collect 2 stars", goal: 2, progress: 0, type: "stars", done: false },
+        { id: "collect_egg", label: "Find 1 mystery egg", goal: 1, progress: 0, type: "eggs", done: false }
+      ];
+    }
+
+    function saveGame() {
+      localStorage.setItem(storageKey, JSON.stringify(save));
+    }
+
+    function showPopup(text) {
+      const popup = document.getElementById("popupMessage");
+      popup.textContent = text;
+      popup.style.display = "block";
+      setTimeout(() => {
+        popup.style.display = "none";
+      }, 1200);
+    }
+
+    function setDaltonText(text) {
+      document.getElementById("daltonText").textContent = text;
+    }
+
+    function showTip() {
+      const tip = daltonTips[Math.floor(Math.random() * daltonTips.length)];
+      setDaltonText(tip);
+    }
+
+    function updateHUD() {
+      document.getElementById("petName").textContent = save.name;
+      document.getElementById("coins").textContent = save.coins;
+      document.getElementById("xp").textContent = `${save.xp} / ${save.level * 20}`;
+      document.getElementById("level").textContent = save.level;
+      document.getElementById("energy").textContent = save.energy;
+      document.getElementById("streak").textContent = save.streak;
+
+      document.getElementById("invCrystals").textContent = save.inventory.crystals;
+      document.getElementById("invStars").textContent = save.inventory.stars;
+      document.getElementById("invFruit").textContent = save.inventory.fruit;
+      document.getElementById("invEggs").textContent = save.inventory.eggs;
+    }
+
+    function renderQuests() {
+      const list = document.getElementById("questList");
+      list.innerHTML = "";
+
+      save.quests.forEach(quest => {
+        const div = document.createElement("div");
+        div.className = `quest ${quest.done ? "done" : ""}`;
+        div.innerHTML = `
+          <strong>${quest.label}</strong><br>
+          Progress: ${quest.progress} / ${quest.goal}
+        `;
+        list.appendChild(div);
+      });
+    }
+
+    function awardQuestCompletion(quest) {
+      save.coins += 15;
+      save.xp += 5;
+      showPopup("Quest Complete!");
+      setDaltonText(`Amazing! You completed: ${quest.label}`);
+    }
+
+    function checkQuestProgress(typeKey) {
+      save.quests.forEach(quest => {
+        if (quest.type === typeKey && !quest.done) {
+          quest.progress += 1;
+          if (quest.progress >= quest.goal) {
+            quest.done = true;
+            awardQuestCompletion(quest);
+          }
+        }
+      });
+
+      renderQuests();
+      saveGame();
+    }
+
+    function addXP(amount) {
+      save.xp += amount;
+      const needed = save.level * 20;
+
+      if (save.xp >= needed) {
+        save.xp -= needed;
+        save.level += 1;
+        showPopup(`Level ${save.level}!`);
+        setDaltonText(`Your Hatchlet reached level ${save.level}! Keep going!`);
+      }
+
+      updateHUD();
+      saveGame();
+    }
+
     function spawnItems() {
       items = [];
-      const types = [
-        { type: "crystal", emoji: "💎", count: 6, color: "#60a5fa" },
-        { type: "star", emoji: "⭐", count: 4, color: "#facc15" },
-        { type: "fruit", emoji: "🍎", count: 5, color: "#ef4444" },
-        { type: "egg", emoji: "🥚", count: 2, color: "#fde68a" }
-      ];
-
-      types.forEach(group => {
+      itemTable.forEach(group => {
         for (let i = 0; i < group.count; i++) {
           let pos;
           do {
@@ -384,7 +568,7 @@
       });
     }
 
-    function drawSkyAndGround() {
+    function drawBackground() {
       ctx.fillStyle = "#a5f3fc";
       ctx.fillRect(0, 0, canvas.width, canvas.height * 0.28);
 
@@ -393,12 +577,11 @@
 
       for (let y = 0; y < rows; y++) {
         for (let x = 0; x < cols; x++) {
-          ctx.strokeStyle = "rgba(255,255,255,0.06)";
+          ctx.strokeStyle = "rgba(255,255,255,0.05)";
           ctx.strokeRect(x * tile, y * tile, tile, tile);
         }
       }
 
-      // little home portal
       const hx = (cols - 3) * tile;
       const hy = (rows - 4) * tile;
       ctx.fillStyle = "#7c3aed";
@@ -409,7 +592,7 @@
       ctx.fillRect(hx + 22, hy + 28, 18, 24);
       ctx.fillStyle = "white";
       ctx.font = "12px Arial";
-      ctx.fillText("HOME", hx + 8, hy - 6);
+      ctx.fillText("NEST", hx + 10, hy - 6);
     }
 
     function drawItems() {
@@ -420,57 +603,53 @@
     }
 
     function drawPlayer() {
-      ctx.fillStyle = player.color;
       ctx.beginPath();
-      ctx.arc(player.x * tile + tile / 2, player.y * tile + tile / 2, 12, 0, Math.PI * 2);
+      ctx.fillStyle = "#ffffff22";
+      ctx.arc(player.x * tile + tile / 2, player.y * tile + tile / 2, 14, 0, Math.PI * 2);
       ctx.fill();
 
-      ctx.font = "18px Arial";
-      ctx.fillText("🐉", player.x * tile + 6, player.y * tile + 24);
+      ctx.font = "24px Arial";
+      ctx.fillText(player.emoji, player.x * tile + 4, player.y * tile + 25);
     }
 
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      drawSkyAndGround();
+      drawBackground();
       drawItems();
       drawPlayer();
     }
 
-    function addXP(amount) {
-      inventory.xp += amount;
-      const needed = inventory.level * 20;
-
-      if (inventory.xp >= needed) {
-        inventory.xp -= needed;
-        inventory.level += 1;
-        setDaltonText(`Amazing! Your Hatchlet reached level ${inventory.level}! Keep exploring!`);
-      }
-
-      updateUI();
-    }
-
     function collectItem(item) {
       if (item.type === "crystal") {
-        inventory.crystals += 1;
-        inventory.coins += 4;
-        addXP(4);
-      } else if (item.type === "star") {
-        inventory.stars += 1;
-        inventory.coins += 6;
-        addXP(6);
-      } else if (item.type === "fruit") {
-        inventory.fruit += 1;
-        inventory.coins += 2;
-        addXP(2);
-      } else if (item.type === "egg") {
-        inventory.eggs += 1;
-        inventory.coins += 10;
-        addXP(10);
+        save.inventory.crystals += 1;
+        save.coins += item.coins;
+        addXP(item.xp);
+        checkQuestProgress("crystals");
+      }
+
+      if (item.type === "star") {
+        save.inventory.stars += 1;
+        save.coins += item.coins;
+        addXP(item.xp);
+        checkQuestProgress("stars");
+      }
+
+      if (item.type === "fruit") {
+        save.inventory.fruit += 1;
+        save.coins += item.coins;
+        addXP(item.xp);
+      }
+
+      if (item.type === "egg") {
+        save.inventory.eggs += 1;
+        save.coins += item.coins;
+        addXP(item.xp);
+        checkQuestProgress("eggs");
         setDaltonText("You found a mystery egg! That’s a rare find!");
       }
 
-      checkQuests();
-      updateUI();
+      updateHUD();
+      saveGame();
     }
 
     function movePlayer(dx, dy) {
@@ -489,44 +668,27 @@
       draw();
     }
 
-    function updateUI() {
-      document.getElementById("level").textContent = inventory.level;
-      document.getElementById("coins").textContent = inventory.coins;
-      document.getElementById("xp").textContent = `${inventory.xp} / ${inventory.level * 20}`;
-
-      document.getElementById("invCrystals").textContent = inventory.crystals;
-      document.getElementById("invStars").textContent = inventory.stars;
-      document.getElementById("invFruit").textContent = inventory.fruit;
-      document.getElementById("invEggs").textContent = inventory.eggs;
-    }
-
-    function checkQuests() {
-      if (inventory.crystals >= 3) {
-        document.getElementById("questCrystals").classList.add("done");
-      }
-      if (inventory.stars >= 2) {
-        document.getElementById("questStars").classList.add("done");
-      }
-      if (inventory.eggs >= 1) {
-        document.getElementById("questEgg").classList.add("done");
-      }
-    }
-
-    function setDaltonText(text) {
-      document.getElementById("daltonText").textContent = text;
-    }
-
-    function showTip() {
-      const tip = daltonTips[Math.floor(Math.random() * daltonTips.length)];
-      setDaltonText(tip);
-    }
-
-    function resetWorld() {
+    function resetZone() {
       player.x = 2;
       player.y = 2;
       spawnItems();
       setDaltonText("A fresh wave of magic has appeared in ForeverFields. Go explore!");
       draw();
+    }
+
+    function claimDailyReward() {
+      if (save.lastDailyClaim === todayKey) {
+        setDaltonText("You already claimed today’s reward. Come back tomorrow!");
+        return;
+      }
+
+      save.lastDailyClaim = todayKey;
+      save.coins += 25;
+      save.xp += 8;
+      showPopup("Daily Reward!");
+      setDaltonText("Daily reward claimed! Come back tomorrow for more magic.");
+      updateHUD();
+      saveGame();
     }
 
     document.addEventListener("keydown", (e) => {
@@ -544,8 +706,9 @@
       keys[e.key.toLowerCase()] = false;
     });
 
+    updateHUD();
+    renderQuests();
     spawnItems();
-    updateUI();
     draw();
   </script>
 </body>
