@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ForeverFields | Hatchlets</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #0f172a 0%, #1e3a8a 40%, #14532d 100%);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .panel {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 16px;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.2);
+      backdrop-filter: blur(8px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand img {
+      width: 72px;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 8px 14px rgba(0,0,0,0.25));
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 34px;
+    }
+
+    .brand p {
+      margin: 4px 0 0;
+      color: #dbeafe;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .stat {
+      background: rgba(15,23,42,0.45);
+      border-radius: 14px;
+      padding: 10px 12px;
+      text-align: center;
+    }
+
+    .stat .label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #cbd5e1;
+    }
+
+    .stat .value {
+      margin-top: 4px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .game-layout {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .game-wrap {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px;
+      padding: 16px;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.2);
+    }
+
+    .canvas-wrap {
+      background: rgba(15,23,42,0.55);
+      border-radius: 18px;
+      padding: 12px;
+    }
+
+    canvas {
+      width: 100%;
+      max-width: 100%;
+      display: block;
+      background: linear-gradient(180deg, #87ceeb 0%, #b9f3ff 22%, #79c267 22%, #5fab53 100%);
+      border-radius: 16px;
+      image-rendering: pixelated;
+    }
+
+    .controls {
+      margin-top: 12px;
+      color: #dbeafe;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .side {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .dalton-box {
+      text-align: center;
+    }
+
+    .dalton-box img {
+      width: 110px;
+      display: block;
+      margin: 0 auto 10px;
+      animation: floaty 3s ease-in-out infinite;
+    }
+
+    .dalton-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #fde68a;
+    }
+
+    .dalton-text {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #eef2ff;
+      min-height: 72px;
+    }
+
+    .quest-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .quest {
+      background: rgba(15,23,42,0.45);
+      border-radius: 14px;
+      padding: 12px;
+      font-size: 14px;
+    }
+
+    .quest.done {
+      outline: 2px solid rgba(34,197,94,0.7);
+    }
+
+    .inventory-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .item-box {
+      background: rgba(15,23,42,0.45);
+      border-radius: 14px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .item-box .num {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 6px;
+    }
+
+    .bottom-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 12px;
+      padding: 12px 14px;
+      background: linear-gradient(90deg, #8b5cf6, #ec4899);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      flex: 1 1 120px;
+    }
+
+    .btn.secondary {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.14);
+    }
+
+    .note {
+      margin-top: 12px;
+      color: #cbd5e1;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @media (max-width: 920px) {
+      .topbar,
+      .game-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .brand {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="topbar">
+      <div class="panel">
+        <div class="brand">
+          <img src="dalton-dragon.png" alt="Dalton the Dragon" />
+          <div>
+            <h1>ForeverFields</h1>
+            <p>Explore, collect, level up, and grow your Hatchlet’s world.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="stats">
+          <div class="stat">
+            <div class="label">Hatchlet</div>
+            <div class="value" id="petName">Lumo</div>
+          </div>
+          <div class="stat">
+            <div class="label">Level</div>
+            <div class="value" id="level">1</div>
+          </div>
+          <div class="stat">
+            <div class="label">XP</div>
+            <div class="value" id="xp">0 / 20</div>
+          </div>
+          <div class="stat">
+            <div class="label">Coins</div>
+            <div class="value" id="coins">0</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="game-layout">
+      <div class="game-wrap">
+        <div class="canvas-wrap">
+          <canvas id="game" width="640" height="480"></canvas>
+        </div>
+        <div class="controls">
+          Move with <strong>Arrow Keys</strong> or <strong>WASD</strong>. Collect crystals, stars, fruit, and mystery eggs.
+        </div>
+        <div class="bottom-buttons">
+          <button class="btn" onclick="resetWorld()">Respawn World</button>
+          <button class="btn secondary" onclick="showTip()">Dalton Tip</button>
+          <button class="btn secondary" onclick="window.location.href='foreverland.html'">Back to ForeverLand</button>
+        </div>
+        <div class="note">This is your first playable ForeverFields build. We can add saving, nest decorating, and evolution next.</div>
+      </div>
+
+      <div class="side">
+        <div class="panel dalton-box">
+          <img src="dalton-dragon.png" alt="Dalton the Dragon" />
+          <div class="dalton-title">Dalton’s Guide</div>
+          <div class="dalton-text" id="daltonText">
+            Welcome to ForeverFields! Walk around, collect magical items, and grow your Hatchlet stronger.
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="dalton-title">Today’s Quests</div>
+          <div class="quest-list">
+            <div class="quest" id="questCrystals">Collect 3 crystals</div>
+            <div class="quest" id="questStars">Collect 2 stars</div>
+            <div class="quest" id="questEgg">Find 1 mystery egg</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="dalton-title">Inventory</div>
+          <div class="inventory-grid">
+            <div class="item-box">💎 Crystals<div class="num" id="invCrystals">0</div></div>
+            <div class="item-box">⭐ Stars<div class="num" id="invStars">0</div></div>
+            <div class="item-box">🍎 Fruit<div class="num" id="invFruit">0</div></div>
+            <div class="item-box">🥚 Eggs<div class="num" id="invEggs">0</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("game");
+    const ctx = canvas.getContext("2d");
+
+    const tile = 32;
+    const cols = canvas.width / tile;
+    const rows = canvas.height / tile;
+
+    const player = {
+      x: 2,
+      y: 2,
+      color: "#ef4444",
+      emoji: "🐾"
+    };
+
+    const inventory = {
+      crystals: 0,
+      stars: 0,
+      fruit: 0,
+      eggs: 0,
+      coins: 0,
+      xp: 0,
+      level: 1
+    };
+
+    const keys = {};
+    let items = [];
+
+    const daltonTips = [
+      "Try grabbing crystals first. They’re great for early XP.",
+      "Mystery eggs are rare. If you see one, go get it.",
+      "Stars are extra magical. They help you level faster.",
+      "The portal house is your future nest zone.",
+      "Collecting a little every day is how legends begin."
+    ];
+
+    function randomGridPos() {
+      return {
+        x: Math.floor(Math.random() * cols),
+        y: Math.floor(Math.random() * rows)
+      };
+    }
+
+    function spawnItems() {
+      items = [];
+      const types = [
+        { type: "crystal", emoji: "💎", count: 6, color: "#60a5fa" },
+        { type: "star", emoji: "⭐", count: 4, color: "#facc15" },
+        { type: "fruit", emoji: "🍎", count: 5, color: "#ef4444" },
+        { type: "egg", emoji: "🥚", count: 2, color: "#fde68a" }
+      ];
+
+      types.forEach(group => {
+        for (let i = 0; i < group.count; i++) {
+          let pos;
+          do {
+            pos = randomGridPos();
+          } while ((pos.x === player.x && pos.y === player.y) || items.some(it => it.x === pos.x && it.y === pos.y));
+          items.push({ ...group, x: pos.x, y: pos.y });
+        }
+      });
+    }
+
+    function drawSkyAndGround() {
+      ctx.fillStyle = "#a5f3fc";
+      ctx.fillRect(0, 0, canvas.width, canvas.height * 0.28);
+
+      ctx.fillStyle = "#65a30d";
+      ctx.fillRect(0, canvas.height * 0.28, canvas.width, canvas.height * 0.72);
+
+      for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < cols; x++) {
+          ctx.strokeStyle = "rgba(255,255,255,0.06)";
+          ctx.strokeRect(x * tile, y * tile, tile, tile);
+        }
+      }
+
+      // little home portal
+      const hx = (cols - 3) * tile;
+      const hy = (rows - 4) * tile;
+      ctx.fillStyle = "#7c3aed";
+      ctx.fillRect(hx, hy, tile * 2, tile * 2);
+      ctx.fillStyle = "#fef3c7";
+      ctx.fillRect(hx + 10, hy + 12, tile * 1.35, tile * 1.2);
+      ctx.fillStyle = "#111827";
+      ctx.fillRect(hx + 22, hy + 28, 18, 24);
+      ctx.fillStyle = "white";
+      ctx.font = "12px Arial";
+      ctx.fillText("HOME", hx + 8, hy - 6);
+    }
+
+    function drawItems() {
+      ctx.font = "22px Arial";
+      items.forEach(item => {
+        ctx.fillText(item.emoji, item.x * tile + 5, item.y * tile + 24);
+      });
+    }
+
+    function drawPlayer() {
+      ctx.fillStyle = player.color;
+      ctx.beginPath();
+      ctx.arc(player.x * tile + tile / 2, player.y * tile + tile / 2, 12, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.font = "18px Arial";
+      ctx.fillText("🐉", player.x * tile + 6, player.y * tile + 24);
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawSkyAndGround();
+      drawItems();
+      drawPlayer();
+    }
+
+    function addXP(amount) {
+      inventory.xp += amount;
+      const needed = inventory.level * 20;
+
+      if (inventory.xp >= needed) {
+        inventory.xp -= needed;
+        inventory.level += 1;
+        setDaltonText(`Amazing! Your Hatchlet reached level ${inventory.level}! Keep exploring!`);
+      }
+
+      updateUI();
+    }
+
+    function collectItem(item) {
+      if (item.type === "crystal") {
+        inventory.crystals += 1;
+        inventory.coins += 4;
+        addXP(4);
+      } else if (item.type === "star") {
+        inventory.stars += 1;
+        inventory.coins += 6;
+        addXP(6);
+      } else if (item.type === "fruit") {
+        inventory.fruit += 1;
+        inventory.coins += 2;
+        addXP(2);
+      } else if (item.type === "egg") {
+        inventory.eggs += 1;
+        inventory.coins += 10;
+        addXP(10);
+        setDaltonText("You found a mystery egg! That’s a rare find!");
+      }
+
+      checkQuests();
+      updateUI();
+    }
+
+    function movePlayer(dx, dy) {
+      const nx = Math.max(0, Math.min(cols - 1, player.x + dx));
+      const ny = Math.max(0, Math.min(rows - 1, player.y + dy));
+      player.x = nx;
+      player.y = ny;
+
+      const foundIndex = items.findIndex(item => item.x === player.x && item.y === player.y);
+      if (foundIndex !== -1) {
+        const found = items[foundIndex];
+        collectItem(found);
+        items.splice(foundIndex, 1);
+      }
+
+      draw();
+    }
+
+    function updateUI() {
+      document.getElementById("level").textContent = inventory.level;
+      document.getElementById("coins").textContent = inventory.coins;
+      document.getElementById("xp").textContent = `${inventory.xp} / ${inventory.level * 20}`;
+
+      document.getElementById("invCrystals").textContent = inventory.crystals;
+      document.getElementById("invStars").textContent = inventory.stars;
+      document.getElementById("invFruit").textContent = inventory.fruit;
+      document.getElementById("invEggs").textContent = inventory.eggs;
+    }
+
+    function checkQuests() {
+      if (inventory.crystals >= 3) {
+        document.getElementById("questCrystals").classList.add("done");
+      }
+      if (inventory.stars >= 2) {
+        document.getElementById("questStars").classList.add("done");
+      }
+      if (inventory.eggs >= 1) {
+        document.getElementById("questEgg").classList.add("done");
+      }
+    }
+
+    function setDaltonText(text) {
+      document.getElementById("daltonText").textContent = text;
+    }
+
+    function showTip() {
+      const tip = daltonTips[Math.floor(Math.random() * daltonTips.length)];
+      setDaltonText(tip);
+    }
+
+    function resetWorld() {
+      player.x = 2;
+      player.y = 2;
+      spawnItems();
+      setDaltonText("A fresh wave of magic has appeared in ForeverFields. Go explore!");
+      draw();
+    }
+
+    document.addEventListener("keydown", (e) => {
+      const key = e.key.toLowerCase();
+      if (keys[key]) return;
+      keys[key] = true;
+
+      if (key === "arrowup" || key === "w") movePlayer(0, -1);
+      if (key === "arrowdown" || key === "s") movePlayer(0, 1);
+      if (key === "arrowleft" || key === "a") movePlayer(-1, 0);
+      if (key === "arrowright" || key === "d") movePlayer(1, 0);
+    });
+
+    document.addEventListener("keyup", (e) => {
+      keys[e.key.toLowerCase()] = false;
+    });
+
+    spawnItems();
+    updateUI();
+    draw();
+  </script>
+</body>
+</html>
