@@ -66,6 +66,57 @@
   }
 </style>
 
+  .main-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-top: 22px;
+  }
+
+  .big-play-btn {
+    background: linear-gradient(90deg, #22c55e, #14b8a6);
+    color: white;
+    font-size: 24px;
+    padding: 20px 34px;
+    border-radius: 18px;
+    box-shadow: 0 14px 30px rgba(34,197,94,0.28);
+    width: min(100%, 420px);
+    text-align: center;
+    animation: playPulse 1.8s ease-in-out infinite;
+  }
+
+  .instruction-box {
+    width: min(100%, 460px);
+    background: rgba(15,23,42,0.62);
+    border-radius: 18px;
+    padding: 16px;
+    color: #e5edff;
+  }
+
+  .instruction-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #fde68a;
+    margin-bottom: 6px;
+  }
+
+  .instruction-text {
+    font-size: 15px;
+  }
+
+  @keyframes playPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+</style>
+
     @keyframes float {
       0% { transform: translateY(0px); }
       50% { transform: translateY(-10px); }
