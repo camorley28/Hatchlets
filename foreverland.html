@@ -441,5 +441,13 @@
 
     updateSpeech();
   </script>
+  <script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const hatchName = urlParams.get("name") || "your Hatchlet";
+
+  const enterWorldBtn = document.getElementById("enterWorldBtn");
+
+  enterWorldBtn.href = `foreverfields.html?name=${encodeURIComponent(hatchName)}`;
+</script>
 </body>
 </html>
