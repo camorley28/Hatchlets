@@ -10,68 +10,89 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, #0f172a 0%, #1e3a8a 40%, #14532d 100%);
+      background: linear-gradient(180deg, #162557 0%, #233a7a 100%);
       color: white;
       overflow-x: hidden;
     }
 
     .page {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
-      padding: 16px;
-    }
-
-    .topbar {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 14px;
-      margin-bottom: 14px;
+      padding: 14px;
     }
 
     .panel {
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 18px;
-      padding: 14px;
-      box-shadow: 0 14px 30px rgba(0,0,0,0.22);
+      border-radius: 20px;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.18);
       backdrop-filter: blur(8px);
     }
 
-    .brand {
+    /* TOP HUD */
+    .topbar {
+      display: grid;
+      grid-template-columns: 1.2fr 1.3fr;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .brand-panel {
+      padding: 16px 18px;
       display: flex;
       align-items: center;
       gap: 14px;
+      min-height: 110px;
     }
 
-    .brand img {
-      width: 68px;
+    .brand-panel img {
+      width: 72px;
       height: auto;
       display: block;
-      filter: drop-shadow(0 8px 14px rgba(0,0,0,0.25));
+      filter: drop-shadow(0 8px 14px rgba(0,0,0,0.22));
+      flex-shrink: 0;
     }
 
-    .brand h1 {
+    .brand-panel h1 {
       margin: 0;
-      font-size: 30px;
+      font-size: 34px;
+      line-height: 1;
     }
 
-    .brand p {
-      margin: 4px 0 0;
+    .brand-panel p {
+      margin: 8px 0 0;
       color: #dbeafe;
-      font-size: 14px;
+      font-size: 15px;
     }
 
-    .stats {
+    .zone-tag {
+      display: inline-block;
+      margin-top: 10px;
+      background: rgba(34,197,94,0.16);
+      color: #bbf7d0;
+      border: 1px solid rgba(34,197,94,0.24);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 13px;
+    }
+
+    .stats-panel {
+      padding: 12px;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(6, 1fr);
       gap: 10px;
+      align-items: stretch;
     }
 
     .stat {
-      background: rgba(15,23,42,0.5);
-      border-radius: 14px;
-      padding: 10px;
+      background: rgba(15,23,42,0.45);
+      border-radius: 16px;
+      padding: 12px 10px;
       text-align: center;
+      min-height: 88px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .stat .label {
@@ -79,41 +100,40 @@
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: #cbd5e1;
+      margin-bottom: 6px;
     }
 
     .stat .value {
-      margin-top: 4px;
-      font-size: 20px;
+      font-size: 18px;
       font-weight: bold;
+      line-height: 1.1;
     }
 
-    .game-layout {
+    /* MAIN GAME AREA */
+    .main-layout {
       display: grid;
-      grid-template-columns: 1fr 320px;
-      gap: 16px;
+      grid-template-columns: minmax(0, 1fr) 310px;
+      gap: 14px;
       align-items: start;
     }
 
-    .game-wrap {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 20px;
+    .game-panel {
       padding: 14px;
-      box-shadow: 0 16px 36px rgba(0,0,0,0.2);
     }
 
     .canvas-wrap {
-      background: rgba(15,23,42,0.56);
-      border-radius: 16px;
-      padding: 10px;
+      background: rgba(15,23,42,0.58);
+      border-radius: 18px;
+      padding: 12px;
     }
 
     canvas {
       width: 100%;
       display: block;
-      background: linear-gradient(180deg, #87ceeb 0%, #b9f3ff 22%, #79c267 22%, #5fab53 100%);
+      background: linear-gradient(180deg, #9be7f0 0%, #8dd6e6 24%, #85c45f 24%, #5ba34f 100%);
       border-radius: 14px;
       image-rendering: pixelated;
+      min-height: 620px;
     }
 
     .controls {
@@ -138,7 +158,7 @@
       color: white;
       font-weight: bold;
       cursor: pointer;
-      flex: 1 1 120px;
+      flex: 1 1 140px;
       transition: transform 0.15s ease, opacity 0.15s ease;
     }
 
@@ -152,10 +172,22 @@
       border: 1px solid rgba(255,255,255,0.14);
     }
 
+    .note {
+      margin-top: 10px;
+      color: #cbd5e1;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    /* SIDE COLUMN */
     .side {
       display: flex;
       flex-direction: column;
       gap: 14px;
+    }
+
+    .side .panel {
+      padding: 14px;
     }
 
     .dalton-box {
@@ -163,31 +195,26 @@
     }
 
     .dalton-box img {
-      width: 100px;
+      width: 92px;
       display: block;
       margin: 0 auto 10px;
       animation: floaty 3s ease-in-out infinite;
     }
 
-    .dalton-title {
+    .section-title {
       font-size: 18px;
       font-weight: bold;
-      margin-bottom: 8px;
       color: #fde68a;
+      margin-bottom: 10px;
+      text-align: center;
     }
 
     .dalton-text {
       font-size: 14px;
       line-height: 1.6;
       color: #eef2ff;
-      min-height: 72px;
-    }
-
-    .section-title {
-      font-size: 17px;
-      font-weight: bold;
-      color: #fde68a;
-      margin-bottom: 10px;
+      min-height: 66px;
+      text-align: center;
     }
 
     .quest-list {
@@ -196,7 +223,7 @@
     }
 
     .quest {
-      background: rgba(15,23,42,0.48);
+      background: rgba(15,23,42,0.45);
       border-radius: 14px;
       padding: 12px;
       font-size: 14px;
@@ -216,27 +243,16 @@
     }
 
     .item-box {
-      background: rgba(15,23,42,0.48);
+      background: rgba(15,23,42,0.45);
       border-radius: 14px;
       padding: 12px;
       text-align: center;
     }
 
     .item-box .num {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: bold;
       margin-top: 6px;
-    }
-
-    .zone-tag {
-      display: inline-block;
-      background: rgba(34,197,94,0.16);
-      color: #bbf7d0;
-      border: 1px solid rgba(34,197,94,0.24);
-      border-radius: 999px;
-      padding: 6px 10px;
-      font-size: 12px;
-      margin-top: 8px;
     }
 
     .popup {
@@ -250,15 +266,8 @@
       border-radius: 12px;
       font-weight: bold;
       display: none;
-      z-index: 20;
+      z-index: 30;
       box-shadow: 0 12px 30px rgba(0,0,0,0.3);
-    }
-
-    .note {
-      margin-top: 10px;
-      color: #cbd5e1;
-      font-size: 13px;
-      text-align: center;
     }
 
     @keyframes floaty {
@@ -266,25 +275,40 @@
       50% { transform: translateY(-8px); }
     }
 
-    @media (max-width: 960px) {
-      .topbar,
-      .game-layout {
+    @media (max-width: 1100px) {
+      .topbar {
         grid-template-columns: 1fr;
       }
 
-      .stats {
+      .stats-panel {
         grid-template-columns: repeat(3, 1fr);
+      }
+
+      .main-layout {
+        grid-template-columns: 1fr;
+      }
+
+      canvas {
+        min-height: 520px;
       }
     }
 
     @media (max-width: 640px) {
-      .brand {
+      .brand-panel {
         flex-direction: column;
         text-align: center;
       }
 
-      .stats {
+      .stats-panel {
         grid-template-columns: repeat(2, 1fr);
+      }
+
+      .brand-panel h1 {
+        font-size: 28px;
+      }
+
+      canvas {
+        min-height: 420px;
       }
     }
   </style>
@@ -292,54 +316,47 @@
 <body>
   <div class="page">
     <div class="topbar">
-      <div class="panel">
-        <div class="brand">
-          <img src="dalton-dragon.png" alt="Dalton the Dragon" />
-          <div>
-            <h1>ForeverFields</h1>
-            <p>Explore, collect, level up, and build a forever adventure with your Hatchlet.</p>
-            <div class="zone-tag">Zone 1: ForeverFields</div>
-          </div>
+      <div class="panel brand-panel">
+        <img src="dalton-dragon.png" alt="Dalton the Dragon" />
+        <div>
+          <h1>ForeverFields</h1>
+          <p>Explore, collect, level up, and build a forever adventure with your Hatchlet.</p>
+          <div class="zone-tag">Zone 1: ForeverFields</div>
         </div>
       </div>
 
-      <div class="panel">
-      <div class="stat">
-  <div class="label">Hatchlet</div>
-  <div class="value" id="petName">Hatchlet</div>
-</div>
-<div class="stat">
-  <div class="label">Species</div>
-  <div class="value" id="petSpecies">Dragon</div>
-</div>
-          <div class="stat">
-            <div class="label">Level</div>
-            <div class="value" id="level">1</div>
-          </div>
-          <div class="stat">
-            <div class="label">XP</div>
-            <div class="value" id="xp">0 / 20</div>
-          </div>
-          <div class="stat">
-            <div class="label">Coins</div>
-            <div class="value" id="coins">0</div>
-          </div>
-          <div class="stat">
-            <div class="label">Energy</div>
-            <div class="value" id="energy">100</div>
-          </div>
-          <div class="stat">
-            <div class="label">Streak</div>
-            <div class="value" id="streak">1</div>
-          </div>
+      <div class="panel stats-panel">
+        <div class="stat">
+          <div class="label">Hatchlet</div>
+          <div class="value" id="petName">Hatchlet</div>
+        </div>
+        <div class="stat">
+          <div class="label">Species</div>
+          <div class="value" id="petSpecies">Dragon</div>
+        </div>
+        <div class="stat">
+          <div class="label">Level</div>
+          <div class="value" id="level">1</div>
+        </div>
+        <div class="stat">
+          <div class="label">XP</div>
+          <div class="value" id="xp">0 / 20</div>
+        </div>
+        <div class="stat">
+          <div class="label">Coins</div>
+          <div class="value" id="coins">0</div>
+        </div>
+        <div class="stat">
+          <div class="label">Energy</div>
+          <div class="value" id="energy">100</div>
         </div>
       </div>
     </div>
 
-    <div class="game-layout">
-      <div class="game-wrap">
+    <div class="main-layout">
+      <div class="panel game-panel">
         <div class="canvas-wrap">
-          <canvas id="game" width="640" height="480"></canvas>
+          <canvas id="game" width="960" height="620"></canvas>
         </div>
 
         <div class="controls">
@@ -354,14 +371,14 @@
         </div>
 
         <div class="note">
-          This version is built to grow forever: more zones, more Hatchlets, more quests, more rewards.
+          ForeverFields is your first zone. More zones, homes, quests, and collectibles can grow from here forever.
         </div>
       </div>
 
       <div class="side">
         <div class="panel dalton-box">
           <img src="dalton-dragon.png" alt="Dalton the Dragon" />
-          <div class="dalton-title">Dalton’s Guide</div>
+          <div class="section-title">Dalton’s Guide</div>
           <div class="dalton-text" id="daltonText">
             Welcome to ForeverFields! Explore, collect, and grow your Hatchlet stronger every time you play.
           </div>
@@ -391,46 +408,46 @@
     const canvas = document.getElementById("game");
     const ctx = canvas.getContext("2d");
 
-    const tile = 32;
-    const cols = canvas.width / tile;
-    const rows = canvas.height / tile;
+    const tile = 40;
+    const cols = Math.floor(canvas.width / tile);
+    const rows = Math.floor(canvas.height / tile);
 
     const params = new URLSearchParams(window.location.search);
     const hatchName = params.get("name") || "Hatchlet";
 
-   const hatchletData = {
-  Lumo:   { species: "Dragon",   emoji: "🐉", glow: "#f97316" },
-  Ember:  { species: "Dragon",   emoji: "🐉", glow: "#ef4444" },
-  Blaze:  { species: "Dragon",   emoji: "🐉", glow: "#f59e0b" },
-  Drako:  { species: "Dragon",   emoji: "🐉", glow: "#7c3aed" },
-  Cinder: { species: "Dragon",   emoji: "🐉", glow: "#fbbf24" },
+    const hatchletData = {
+      Lumo:   { species: "Dragon",  emoji: "🐉", glow: "#f97316" },
+      Ember:  { species: "Dragon",  emoji: "🐉", glow: "#ef4444" },
+      Blaze:  { species: "Dragon",  emoji: "🐉", glow: "#f59e0b" },
+      Drako:  { species: "Dragon",  emoji: "🐉", glow: "#7c3aed" },
+      Cinder: { species: "Dragon",  emoji: "🐉", glow: "#fbbf24" },
 
-  Bubbles:{ species: "Axolotl",  emoji: "🦎", glow: "#22d3ee" },
-  Misty:  { species: "Axolotl",  emoji: "🦎", glow: "#60a5fa" },
-  Ripple: { species: "Axolotl",  emoji: "🦎", glow: "#38bdf8" },
-  Pearl:  { species: "Axolotl",  emoji: "🦎", glow: "#c084fc" },
-  Luna:   { species: "Axolotl",  emoji: "🦎", glow: "#e879f9" }
-};
+      Bubbles:{ species: "Axolotl", emoji: "🦎", glow: "#22d3ee" },
+      Misty:  { species: "Axolotl", emoji: "🦎", glow: "#60a5fa" },
+      Ripple: { species: "Axolotl", emoji: "🦎", glow: "#38bdf8" },
+      Pearl:  { species: "Axolotl", emoji: "🦎", glow: "#c084fc" },
+      Luna:   { species: "Axolotl", emoji: "🦎", glow: "#e879f9" }
+    };
 
-const currentHatchlet = hatchletData[hatchName] || {
-  species: "Dragon",
-  emoji: "🐉",
-  glow: "#f97316"
-};
+    const currentHatchlet = hatchletData[hatchName] || {
+      species: "Dragon",
+      emoji: "🐉",
+      glow: "#f97316"
+    };
 
-const player = {
-  x: 2,
-  y: 2,
-  emoji: currentHatchlet.emoji,
-  species: currentHatchlet.species,
-  glow: currentHatchlet.glow
-};
+    const player = {
+      x: 2,
+      y: 2,
+      emoji: currentHatchlet.emoji,
+      species: currentHatchlet.species,
+      glow: currentHatchlet.glow
+    };
 
     const itemTable = [
-      { type: "crystal", emoji: "💎", count: 6, coins: 4, xp: 4 },
-      { type: "star", emoji: "⭐", count: 4, coins: 6, xp: 6 },
-      { type: "fruit", emoji: "🍎", count: 5, coins: 2, xp: 2 },
-      { type: "egg", emoji: "🥚", count: 2, coins: 10, xp: 10 }
+      { type: "crystal", emoji: "💎", count: 8, coins: 4, xp: 4 },
+      { type: "star", emoji: "⭐", count: 5, coins: 6, xp: 6 },
+      { type: "fruit", emoji: "🍎", count: 6, coins: 2, xp: 2 },
+      { type: "egg", emoji: "🥚", count: 3, coins: 10, xp: 10 }
     ];
 
     const daltonTips = [
@@ -501,20 +518,20 @@ const player = {
       setDaltonText(tip);
     }
 
-   function updateHUD() {
-  document.getElementById("petName").textContent = save.name;
-  document.getElementById("petSpecies").textContent = currentHatchlet.species;
-  document.getElementById("coins").textContent = save.coins;
-  document.getElementById("xp").textContent = `${save.xp} / ${save.level * 20}`;
-  document.getElementById("level").textContent = save.level;
-  document.getElementById("energy").textContent = save.energy;
-  document.getElementById("streak").textContent = save.streak;
+    function updateHUD() {
+      document.getElementById("petName").textContent = save.name;
+      document.getElementById("petSpecies").textContent = currentHatchlet.species;
+      document.getElementById("coins").textContent = save.coins;
+      document.getElementById("xp").textContent = `${save.xp} / ${save.level * 20}`;
+      document.getElementById("level").textContent = save.level;
+      document.getElementById("energy").textContent = save.energy;
 
-  document.getElementById("invCrystals").textContent = save.inventory.crystals;
-  document.getElementById("invStars").textContent = save.inventory.stars;
-  document.getElementById("invFruit").textContent = save.inventory.fruit;
-  document.getElementById("invEggs").textContent = save.inventory.eggs;
-}
+      document.getElementById("invCrystals").textContent = save.inventory.crystals;
+      document.getElementById("invStars").textContent = save.inventory.stars;
+      document.getElementById("invFruit").textContent = save.inventory.fruit;
+      document.getElementById("invEggs").textContent = save.inventory.eggs;
+    }
+
     function renderQuests() {
       const list = document.getElementById("questList");
       list.innerHTML = "";
@@ -522,10 +539,7 @@ const player = {
       save.quests.forEach(quest => {
         const div = document.createElement("div");
         div.className = `quest ${quest.done ? "done" : ""}`;
-        div.innerHTML = `
-          <strong>${quest.label}</strong><br>
-          Progress: ${quest.progress} / ${quest.goal}
-        `;
+        div.innerHTML = `<strong>${quest.label}</strong><br>Progress: ${quest.progress} / ${quest.goal}`;
         list.appendChild(div);
       });
     }
@@ -608,39 +622,38 @@ const player = {
     }
 
     function drawItems() {
-      ctx.font = "22px Arial";
+      ctx.font = "26px Arial";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
       items.forEach(item => {
-        ctx.fillText(item.emoji, item.x * tile + 5, item.y * tile + 24);
+        ctx.fillText(item.emoji, item.x * tile + tile / 2, item.y * tile + tile / 2);
       });
     }
-function drawPlayer() {
-  const px = player.x * tile + tile / 2;
-  const py = player.y * tile + tile / 2;
 
-  // darker outer shadow so the character is easier to see
-  ctx.beginPath();
-  ctx.fillStyle = "rgba(0,0,0,0.35)";
-  ctx.arc(px, py, 18, 0, Math.PI * 2);
-  ctx.fill();
+    function drawPlayer() {
+      const px = player.x * tile + tile / 2;
+      const py = player.y * tile + tile / 2;
 
-  // colored glow tied to Hatchlet type
-  ctx.beginPath();
-  ctx.fillStyle = player.glow + "55";
-  ctx.arc(px, py, 16, 0, Math.PI * 2);
-  ctx.fill();
+      ctx.beginPath();
+      ctx.fillStyle = "rgba(0,0,0,0.38)";
+      ctx.arc(px, py, 22, 0, Math.PI * 2);
+      ctx.fill();
 
-  // inner body circle
-  ctx.beginPath();
-  ctx.fillStyle = "rgba(15,23,42,0.85)";
-  ctx.arc(px, py, 13, 0, Math.PI * 2);
-  ctx.fill();
+      ctx.beginPath();
+      ctx.fillStyle = player.glow + "66";
+      ctx.arc(px, py, 19, 0, Math.PI * 2);
+      ctx.fill();
 
-  // actual Hatchlet character
-  ctx.font = "26px Arial";
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-  ctx.fillText(player.emoji, px, py + 1);
-}
+      ctx.beginPath();
+      ctx.fillStyle = "rgba(15,23,42,0.85)";
+      ctx.arc(px, py, 15, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.font = "30px Arial";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(player.emoji, px, py + 1);
+    }
 
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
